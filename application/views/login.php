@@ -32,7 +32,10 @@
 	<div class="limiter">
 		<div class="container-login100" style="background-image: url('<?= base_url() ?>assets_login/images/bg-01.jpg');">
 			<div class="wrap-login100 p-l-110 p-r-110 p-t-62 p-b-33">
-				<form class="login100-form validate-form flex-sb flex-w" method="POST" action="<?= base_url('admin')?>">
+
+			<div class="flash-auth" data-flashauth="<?= $this->session->flashdata('Auth')?>"></div>
+
+				<form class="login100-form validate-form flex-sb flex-w" method="POST" action="<?= base_url('Auth/Proces')?>">
 					<span class="login100-form-title p-b-53">
 						Sign In
 					</span>
@@ -62,19 +65,9 @@
 					</div>
 
 					<div class="container-login100-form-btn m-t-17">
-						<button class="login100-form-btn">
+						<button class="login100-form-btn" name="login">
 							Sign In
 						</button>
-					</div>
-
-					<div class="w-full text-center p-t-55">
-						<span class="txt2">
-							Not a member?
-						</span>
-
-						<a href="#" class="txt2 bo1">
-							Sign up now
-						</a>
 					</div>
 				</form>
 			</div>
@@ -100,6 +93,25 @@
 	<script src="<?= base_url() ?>assets_login/vendor/countdowntime/countdowntime.js"></script>
 <!--===============================================================================================-->
 	<script src="<?= base_url() ?>assets_login/js/main.js"></script>
+<!-- Sweet Alert -->
+	<script src="<?= base_url() ?>assets/js/plugin/sweetalert/sweetalert.min.js"></script>
+
+	<script>
+        
+        const flashAuth = $('.flash-auth').data('flashauth');
+
+        if(flashAuth == 'Gagal')
+        {
+            swal({
+				icon: 'error',
+                title: 'Login ' + flashAuth ,
+                text: 'Username / Password Salah !!!'
+                // timer: 2000
+            });
+        }
+
+		// console.log(flashAuth);
+    </script>
 
 </body>
 </html>

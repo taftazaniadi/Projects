@@ -133,3 +133,31 @@
         fillColor: 'rgba(255, 165, 52, .14)'
     });
 </script>
+
+<script>
+    $('.log-out').on('click', function(e) {
+        e.preventDefault();
+        const href = $(this).attr('href');
+
+        swal({
+            icon: 'warning',
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            type: 'warning',
+            buttons: {
+                confirm: {
+                    text: 'Yes, Log Out',
+                    className: 'btn btn-success'
+                },
+                cancel: {
+                    visible: true,
+                    className: 'btn btn-danger'
+                }
+            }
+        }).then((result) => {
+            if (result) {
+                document.location.href = href;
+            }
+        });
+    });
+</script>

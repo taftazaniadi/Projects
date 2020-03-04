@@ -542,6 +542,13 @@
     </div>
 
     <?php $this->load->view("_partials/js.php") ?>
+    <script>
+        swal({
+            icon: 'success',
+            title: 'Hello, <?= $this->fungsi->user_login()->Nama ?>',
+            text: 'Welcome to SPK Systems'
+        });
+    </script>
 </body>
 
 </html>
