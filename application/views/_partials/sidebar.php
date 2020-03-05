@@ -67,7 +67,7 @@
                     <div class="collapse" id="forms">
                         <ul class="nav nav-collapse">
                             <li>
-                                <a href="<?= base_url('Admin/Nilai') ?>">
+                                <a href="<?= base_url('Admin/Proses') ?>">
                                     <span class="sub-item">Nilai</span>
                                 </a>
                             </li>

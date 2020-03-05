@@ -33,6 +33,9 @@
 <!-- Sweet Alert -->
 <script src="<?= base_url() ?>assets/js/plugin/sweetalert/sweetalert.min.js"></script>
 
+<!-- Datatables -->
+<script src="<?= base_url() ?>assets/js/plugin/datatables/datatables.min.js"></script>
+
 <!-- Atlantis JS -->
 <script src="<?= base_url() ?>assets/js/atlantis.min.js"></script>
 
@@ -43,7 +46,7 @@
     Circles.create({
         id: 'circles-1',
         radius: 45,
-        value: 60,
+        value: 100,
         maxValue: 100,
         width: 7,
         text: 5,
@@ -58,7 +61,7 @@
     Circles.create({
         id: 'circles-2',
         radius: 45,
-        value: 70,
+        value: 100,
         maxValue: 100,
         width: 7,
         text: 36,
@@ -73,7 +76,7 @@
     Circles.create({
         id: 'circles-3',
         radius: 45,
-        value: 40,
+        value: 100,
         maxValue: 100,
         width: 7,
         text: 12,
@@ -85,53 +88,20 @@
         styleText: true
     })
 
-    var totalIncomeChart = document.getElementById('totalIncomeChart').getContext('2d');
-
-    var mytotalIncomeChart = new Chart(totalIncomeChart, {
-        type: 'bar',
-        data: {
-            labels: ["S", "M", "T", "W", "T", "F", "S", "S", "M", "T"],
-            datasets: [{
-                label: "Total Income",
-                backgroundColor: '#ff9e27',
-                borderColor: 'rgb(23, 125, 255)',
-                data: [6, 4, 9, 5, 4, 6, 4, 3, 8, 10],
-            }],
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            legend: {
-                display: false,
-            },
-            scales: {
-                yAxes: [{
-                    ticks: {
-                        display: false //this will remove only the label
-                    },
-                    gridLines: {
-                        drawBorder: false,
-                        display: false
-                    }
-                }],
-                xAxes: [{
-                    gridLines: {
-                        drawBorder: false,
-                        display: false
-                    }
-                }]
-            },
-        }
-    });
-
-    $('#lineChart').sparkline([105, 103, 123, 100, 95, 105, 115], {
-        type: 'line',
-        height: '70',
-        width: '100%',
-        lineWidth: '2',
-        lineColor: '#ffa534',
-        fillColor: 'rgba(255, 165, 52, .14)'
-    });
+    Circles.create({
+        id: 'circles-4',
+        radius: 45,
+        value: 100,
+        maxValue: 100,
+        width: 7,
+        text: 12,
+        colors: ['#f1f1f1', '#F28391'],
+        duration: 400,
+        wrpClass: 'circles-wrp',
+        textClass: 'circles-text',
+        styleWrapper: true,
+        styleText: true
+    })
 </script>
 
 <script>
@@ -158,6 +128,54 @@
             if (result) {
                 document.location.href = href;
             }
+        });
+    });
+
+    $('.remove').on('click', function(e) {
+        e.preventDefault();
+        const href = $(this).attr('href');
+
+        swal({
+            icon: 'warning',
+            title: 'Are you sure?',
+            text: "You won't be able to get this data again!",
+            type: 'warning',
+            buttons: {
+                confirm: {
+                    text: 'Yes, Remove all data',
+                    className: 'btn btn-success'
+                },
+                cancel: {
+                    visible: true,
+                    className: 'btn btn-danger'
+                }
+            }
+        }).then((result) => {
+            if (result) {
+                document.location.href = href;
+            }
+        });
+    });
+</script>
+
+<script>
+    $(document).ready(function() {
+        // Add Row
+        $('#add-row').DataTable({
+            "pageLength": 5,
+        });
+
+        var action = '<td> <div class="form-button-action"> <button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-primary btn-lg" data-original-title="Edit Task"> <i class="fa fa-edit"></i> </button> <button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Remove"> <i class="fa fa-times"></i> </button> </div> </td>';
+
+        $('#addRowButton').click(function() {
+            $('#add-row').dataTable().fnAddData([
+                $("#addName").val(),
+                $("#addPosition").val(),
+                $("#addOffice").val(),
+                action
+            ]);
+            $('#addRowModal').modal('hide');
+
         });
     });
 </script>
