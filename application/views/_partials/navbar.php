@@ -31,14 +31,14 @@
                             <div class="user-box">
                                 <div class="avatar-lg"><img src="<?= base_url() ?>assets/img/profile.jpg" alt="image profile" class="avatar-img rounded"></div>
                                 <div class="u-text">
-                                    <h4>Hizrian</h4>
-                                    <p class="text-muted">hello@example.com</p>
+                                    <h4><?= $this->fungsi->user_login()->Nama ?></h4>
+                                    <p class="text-muted"><?= $this->fungsi->user_login()->Keterangan ?></p>
                                 </div>
                             </div>
                         </li>
                         <li>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">My Profile</a>
+                            <a class="dropdown-item" href="<?= base_url('Admin/Profile') ?>">My Profile</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item log-out" href="<?= base_url('Auth/logout') ?>">Logout</a>
                         </li>

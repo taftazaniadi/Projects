@@ -12,14 +12,12 @@ class Auth extends CI_Controller
 	{
 		$post = $this->input->post(null, TRUE);
 
-		if (isset($_POST['login']))
-		{
+		if (isset($_POST['login'])) {
 			$this->load->model('M_Auth', 'Auth');
 
 			$query = $this->Auth->login($post);
 
-			if ($query->num_rows() > 0)
-			{
+			if ($query->num_rows() > 0) {
 				$row = $query->row();
 				$params = array(
 					'ID' => $row->ID,
@@ -33,26 +31,21 @@ class Auth extends CI_Controller
 
 				$level = $row->Level;
 
-				if ($level == 1)
-				{
+				if ($level == 1) {
 					$this->session->set_flashdata('Auth', $params['Nama']);
-					echo "<script>window.location='". base_url('Admin') ."'</script>";
-				}
-				else
-				{
+					echo "<script>window.location='" . base_url('Admin') . "'</script>";
+				} else {
 					$this->session->set_flashdata('Auth', 'Username/Password tidak diketahui');
 					// echo "<script>alert('Silahkan login lagi')</script>";
 				}
-			}
-			else 
-			{
+			} else {
 				$this->session->set_flashdata('Auth', 'Gagal');
-				echo "<script>document.location.href='". base_url('Auth') ."'</script>";
+				echo "<script>document.location.href='" . base_url('Auth') . "'</script>";
 			}
 		}
 	}
 
-	public function logout()
+	public function Logout()
 	{
 		$params = array('ID');
 
