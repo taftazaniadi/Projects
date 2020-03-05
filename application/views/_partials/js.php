@@ -142,7 +142,7 @@
         swal({
             icon: 'warning',
             title: 'Are you sure?',
-            text: "You won't be able to revert this!",
+            text: "You won't be able to access this again!",
             type: 'warning',
             buttons: {
                 confirm: {

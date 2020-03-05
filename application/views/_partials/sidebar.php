@@ -81,7 +81,7 @@
                     <h4 class="text-section">Setting</h4>
                 </li>
                 <li class="nav-item">
-                    <a data-toggle="collapse" href="<?= base_url('Auth/Logout') ?>">
+                    <a class="log-out" href="<?= base_url() ?>Auth/Logout">
                         <i class="fas fa-power-off"></i>
                         <p>Log Out</p>
                     </a>
