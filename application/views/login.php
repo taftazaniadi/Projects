@@ -49,7 +49,7 @@
 						</span>
 					</div>
 					<div class="wrap-input100 validate-input" data-validate="Username is required">
-						<input class="input100"  type="text" name="username">
+						<input class="input100" type="text" name="username" onkeydown="return movepass()">
 						<span class="focus-input100"></span>
 					</div>
 
@@ -63,7 +63,7 @@
 						</a>
 					</div>
 					<div class="wrap-input100 validate-input" data-validate="Password is required">
-						<input class="input100" type="password" name="pass">
+						<input class="input100" id="pass" type="password" name="pass">
 						<span class="focus-input100"></span>
 					</div>
 
@@ -111,6 +111,18 @@
 			});
 		}
 
+		function movepass(evt) {
+			var e = event || evt; // for trans-browser compatibility
+			var charCode = e.which || e.keyCode;
+
+			// alert(charCode);
+			if (charCode == 9) {
+				document.getElementById('pass').focus();
+				document.getElementById('pass').select();
+			}
+
+			return false;
+		}
 		// console.log(flashAuth);
 	</script>
 
