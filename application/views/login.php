@@ -119,9 +119,10 @@
 			if (charCode == 9) {
 				document.getElementById('pass').focus();
 				document.getElementById('pass').select();
+				return false;
 			}
 
-			return false;
+			
 		}
 		// console.log(flashAuth);
 	</script>
