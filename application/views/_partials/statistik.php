@@ -11,12 +11,9 @@
                     </div>
                     <div class="px-2 pb-2 pb-md-0 text-center">
                         <div id="circles-2"></div>
-                        <h6 class="fw-bold mt-3 mb-0">Parameter</h6>
+                        <h6 class="fw-bold mt-3 mb-0">Siswa</h6>
                     </div>
-                    <div class="px-2 pb-2 pb-md-0 text-center">
-                        <div id="circles-3"></div>
-                        <h6 class="fw-bold mt-3 mb-0">Alternatif</h6>
-                    </div>
+                    
                     <div class="px-2 pb-2 pb-md-0 text-center">
                         <div id="circles-4"></div>
                         <h6 class="fw-bold mt-3 mb-0">Nilai</h6>

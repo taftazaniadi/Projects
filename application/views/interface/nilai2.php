@@ -25,7 +25,7 @@
                     <div class="page-inner py-5">
                         <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
                             <div>
-                                <h2 class="text-white pb-2 fw-bold">Data Parameter</h2>
+                                <h2 class="text-white pb-2 fw-bold">Data Nilai</h2>
                                 <h5 class="text-white op-7 mb-2">Sistem Penunjang Keputusan - Metode SAW</h5>
                             </div>
                         </div>
@@ -34,16 +34,21 @@
                 <div class="page-inner mt--5">
                     <!-- Statistik -->
                     <?php $this->load->view('_partials/statistik.php') ?>
-                    
+
                     <div class="row">
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header">
                                     <div class="d-flex align-items-center">
-                                        <h4 class="card-title">Tabel Data Parameter</h4>
+                                        <h4 class="card-title">Tabel Data Nilai</h4>
                                         <button class="btn btn-primary btn-round ml-auto" data-toggle="modal" data-target="#addRowModal">
                                             <i class="fa fa-plus"></i>
-                                            Tambah Parameter
+                                            Tambah Data Nilai
+                                        </button>
+                                        &nbsp; &nbsp;
+                                        <button class="btn btn-danger btn-round remove">
+                                            <i class="fa fa-trash"></i>
+                                            Hapus Data Nilai
                                         </button>
                                     </div>
                                 </div>
@@ -57,7 +62,7 @@
                                                         <span class="fw-mediumbold">
                                                             Data</span>
                                                         <span class="fw-light">
-                                                            Parameter
+                                                            Nilai
                                                         </span>
                                                     </h5>
                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -70,32 +75,33 @@
                                                         <div class="row">
                                                             <div class="col-sm-12">
                                                                 <div class="form-group form-group-default">
-                                                                    <label>Nama Kriteria</label>
-                                                                    <select class="form-control" id="formGroupDefaultSelect">
-                                                                        <option>1</option>
-                                                                        <option>2</option>
-                                                                        <option>3</option>
-                                                                        <option>4</option>
-                                                                        <option>5</option>
-                                                                    </select>
+                                                                    <label>Nama Siswa</label>
+                                                                    <input id="addName" type="text" class="form-control" placeholder="ex: Muhammad Taftazani Adi">
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-6 pr-0">
-                                                                <div class="form-group form-group-default">
-                                                                    <label>Nilai</label>
-                                                                    <input id="addPosition" type="text" class="form-control" placeholder="ex: <=30">
+                                                                <div class="form-check">
+                                                                    <label>Gender</label><br />
+                                                                    <label class="form-radio-label">
+                                                                        <input class="form-radio-input" type="radio" name="optionsRadios" value="" checked="">
+                                                                        <span class="form-radio-sign">Male</span>
+                                                                    </label>
+                                                                    <label class="form-radio-label ml-3">
+                                                                        <input class="form-radio-input" type="radio" name="optionsRadios" value="">
+                                                                        <span class="form-radio-sign">Female</span>
+                                                                    </label>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-6">
                                                                 <div class="form-group form-group-default">
-                                                                    <label>Bobot</label>
-                                                                    <input id="addOffice" type="text" class="form-control" placeholder="ex: (1 - 5)">
+                                                                    <label>Jenis Sekolah</label>
+                                                                    <input id="addOffice" type="text" class="form-control" placeholder="ex: SMP">
                                                                 </div>
                                                             </div>
                                                             <div class="col-sm-12">
                                                                 <div class="form-group form-group-default">
-                                                                    <label>Keterangan</label>
-                                                                    <input id="addOffice" type="text" class="form-control" placeholder="ex: Sangat Tinggi">
+                                                                    <label>Asal Sekolah</label>
+                                                                    <input id="addOffice" type="text" class="form-control" placeholder="ex: SMP Negeri - 1 Arsel">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -113,8 +119,11 @@
                                         <table id="add-row" class="display table table-striped table-hover">
                                             <thead>
                                                 <tr>
-                                                    <th style="width: 10%">No</th>
-                                                    <th>Nama Kriteria</th>
+                                                    <th>ID</th>
+                                                    <th>Nama Siswa</th>
+                                                    <th>Jenis Kelamin</th>
+                                                    <th>Asal Sekolah</th>
+                                                    <th>Jenis Sekolah</th>
                                                     <th style="width: 10%">Action</th>
                                                 </tr>
                                             </thead>

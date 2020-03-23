@@ -64,7 +64,7 @@
         value: 100,
         maxValue: 100,
         width: 7,
-        text: 36,
+        text: <?php echo $total->c; ?>,
         colors: ['#f1f1f1', '#2BB930'],
         duration: 400,
         wrpClass: 'circles-wrp',
@@ -105,6 +105,40 @@
 </script>
 
 <script>
+    function hapus_siswa(nis) {
+        swal({
+            icon: 'warning',
+            title: 'Yakin ingin menghapus data: ',
+            text: 'nis: ' + nis,
+            buttons: {
+                confirm: {
+                    text: 'Hapus',
+                    className: 'btn btn-danger'
+                },
+                cancel: {
+                    visible: 'true',
+                    className: 'btn btn-success'
+                }
+            }
+        }).then((result) => {
+            if (result)
+                document.location.href = 'Hapus_siswa/' + nis;
+
+        });
+    }
+    $('.edit-bt').on('click', function(e) {
+        data = $(this).parent().parent();
+        nis = data.children().eq(0).html();
+        nama = data.children().eq(1).html();
+        kelas=data.children().eq(2).attr('value');
+        // console.log($(this).parent().parent()[0].children[0]);
+        // console.log(kelas+nama+nis);
+        $('#editNis').val(nis);
+        $('#editNama').val(nama);
+        $('#editKelas').val(kelas);
+        $("#form-edit").attr('action','Edit_siswa/'+nis);
+
+    });
     $('.log-out').on('click', function(e) {
         e.preventDefault();
         const href = $(this).attr('href');
