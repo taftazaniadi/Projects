@@ -49,7 +49,7 @@
         value: 100,
         maxValue: 100,
         width: 7,
-        text: 5,
+        text: 3,
         colors: ['#f1f1f1', '#FF9E27'],
         duration: 400,
         wrpClass: 'circles-wrp',
@@ -144,6 +144,24 @@
         $('#editNama').val(nama);
         $('#editKelas').val(kelas);
         $("#form-edit").attr('action','Edit_siswa/'+nis);
+
+    });
+    $('.edit-nilai').on('click', function(e) {
+        data = $(this).parent().parent();
+        id = data.children().eq(0).attr('value');
+        nis = data.children().eq(0).attr('nis');
+        semester=data.children().eq(1).attr('value');
+        akademik = data.children().eq(2).html();
+        prestasi = data.children().eq(3).html();
+        sikap = data.children().eq(4).html();
+        // console.log($(this).parent().parent()[0].children[0]);
+        // console.log(kelas+nama+nis);
+        $('#editSiswa').val(nis);
+        $('#editSmt').val(semester);
+        $('#editAkademik').val(akademik);
+        $('#editPrestasi').val(prestasi);
+        $('#editSikap').val(sikap);
+        $("#form-edit").attr('action','Edit_nilai/'+id);
 
     });
     $('.log-out').on('click', function(e) {

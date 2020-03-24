@@ -64,6 +64,14 @@ class Admin extends CI_Controller
 		$this->Siswa->delete($nis);
 		redirect("Admin/Siswa");
 	}
+	public function Edit_nilai($id)
+	{
+		if ($this->input->post('submit')) {
+			$this->Nilai->edit($id);
+			// echo json_encode($data);
+			redirect("Admin/Nilai");
+		}
+	}
 	public function Hapus_nilai($id)
 	{
 		$this->Nilai->delete($id);

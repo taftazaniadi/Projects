@@ -18,6 +18,12 @@ class M_Nilai extends CI_Model{
         array_pop($data);
         $this->db->insert('nilai',$data);
     }
+    public function edit($id){
+        $data=$this->input->post();
+        array_pop($data);
+        $this->db->where('id',$id);
+        $this->db->update('nilai',$data);
+    }
     public function delete($id){
         $this->db->where('id',$id);
         $this->db->delete('nilai');

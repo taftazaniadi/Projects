@@ -130,9 +130,8 @@
                                             </div>
                                         </div>
                                     </div>
-
                                     <!-- edit modal -->
-                                    <!-- <div class="modal fade" id="editRowModal" tabindex="-1" role="dialog" aria-hidden="true">
+                                    <div class="modal fade" id="editRowModal" tabindex="-1" role="dialog" aria-hidden="true">
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header no-bd">
@@ -148,37 +147,54 @@
                                                     </button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <p class="small">edit nilai</p>
-                                                    <form action="#" id="form-edit" method="POST">
+                                                    <p class="small">Tambah nilai baru</p>
+                                                    <form action="#" method="POST" id="form-edit">
                                                         <div class="row">
-                                                            <div class="col-sm-12">
+                                                            <div class="col-md-12">
                                                                 <div class="form-group form-group-default">
-                                                                    <label>NIS</label>
-                                                                    <input id="editNis" name="nis" type="number" class="form-control" placeholder="ex: 6100000">
+                                                                    <label>Siswa</label>
+                                                                    <select name="siswa" class="form-control" id="editSiswa">
+                                                                        <?php foreach ($listnama as $list) {
+                                                                            echo '
+                                                                        <option value="' . $list->nis . '">' . $list->nama . '</option>
+                                                                        ';
+                                                                        } ?>
+                                                                    </select>
                                                                 </div>
                                                             </div>
-                                                            <div class="col-md-6 pr-0">
+                                                        </div>
+
+                                                        <div class="row">
+                                                            <div class="col-md-6">
                                                                 <div class="form-group form-group-default">
-                                                                    <label>Nama</label>
-                                                                    <input id="editNama" name="nama" type="text" class="form-control" placeholder="ex: Faizal">
+                                                                    <label>Semester</label>
+                                                                    <select class="form-control" name="semester" id="editSmt">
+
+                                                                        <option value="1">ganjil</option>
+                                                                        <option value="2">genap</option>
+
+                                                                    </select>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-6">
                                                                 <div class="form-group form-group-default">
-                                                                    <label>Kelas</label>
-                                                                    <select class="form-control" name="kelas" id="editKelas">
-                                                                        <?php
-
-                                                                        // foreach ($kelas as $k) {
-                                                                        //     echo '
-                                                                        //     <option value="' . $k->id . '">' . $k->alias . ' - ' . $k->jurusan . '</option>
-                                                                        //     ';
-                                                                        // }
-
-                                                                        ?>
-                                                                    </select>
+                                                                    <label>Akademik</label>
+                                                                    <input id="editAkademik" name="akademik" type="number" class="form-control" placeholder="ex: 90">
                                                                 </div>
                                                             </div>
+                                                            <div class="col-md-6">
+                                                                <div class="form-group form-group-default">
+                                                                    <label>Prestasi</label>
+                                                                    <input id="editPrestasi" name="prestasi" type="number" class="form-control" placeholder="ex: 1">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <div class="form-group form-group-default">
+                                                                    <label>Sikap</label>
+                                                                    <input id="editSikap" name="sikap" type="number" class="form-control" placeholder="ex: 100">
+                                                                </div>
+                                                            </div>
+
 
                                                         </div>
                                                         <div class="modal-footer no-bd">
@@ -190,8 +206,11 @@
 
                                             </div>
                                         </div>
-                                    </div> -->
+                                    </div>
+
                                     <!-- end edit -->
+
+
 
                                     <div class="table-responsive">
                                         <table id="add-row" class="display table table-striped table-hover">
@@ -209,21 +228,21 @@
                                                 <?php
                                                 if (!empty($nilai)) {
                                                     $no = 0;
+                                                    $strSmt = [];
+                                                    array_push($strSmt, 'ganjil');
+                                                    array_push($strSmt, 'genap');
                                                     foreach ($nilai as $data) {
-                                                        if ($data->semester % 2 == 0)
-                                                            $data->semester = "genap";
-                                                        else
-                                                            $data->semester = "ganjil";
+
                                                         $avg = floor(($data->akademik + $data->prestasi + $data->sikap) / 3);
                                                         echo '
                                                         <tr>
-                                                            <td>' . $data->nama . '</td>
-                                                            <td>' . $data->semester . '</td>
+                                                            <td value="' . $data->id . '" nis="' . $data->siswa . '">' . $data->nama . '</td>
+                                                            <td value="' . $data->semester . '">' . $strSmt[--$data->semester] . '</td>
                                                             <td>' . $data->akademik . '</td>
                                                             <td>' . $data->prestasi . '</td>
                                                             <td>' . $data->sikap . '</td>
                                                             <td class="action">
-                                                            <button class="edit-bt btn btn-success btn-sm" data-toggle="modal" data-target="#editRowModal"><i class="fa fa-pen"></i> Edit</button>
+                                                            <button class="edit-nilai btn btn-success btn-sm" data-toggle="modal" data-target="#editRowModal"><i class="fa fa-pen"></i> Edit</button>
                                                             <button onclick="hapus_nilai(' . $data->id . ')" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> Hapus</button></td>
                                                         </tr>
                                                         ';
