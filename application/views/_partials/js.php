@@ -73,20 +73,6 @@
         styleText: true
     })
 
-    Circles.create({
-        id: 'circles-3',
-        radius: 45,
-        value: 100,
-        maxValue: 100,
-        width: 7,
-        text: 12,
-        colors: ['#f1f1f1', '#F25961'],
-        duration: 400,
-        wrpClass: 'circles-wrp',
-        textClass: 'circles-text',
-        styleWrapper: true,
-        styleText: true
-    })
 
     Circles.create({
         id: 'circles-4',
@@ -94,7 +80,7 @@
         value: 100,
         maxValue: 100,
         width: 7,
-        text: 12,
+        text: <?php echo $count->c; ?>,
         colors: ['#f1f1f1', '#F28391'],
         duration: 400,
         wrpClass: 'circles-wrp',
@@ -123,6 +109,27 @@
         }).then((result) => {
             if (result)
                 document.location.href = 'Hapus_siswa/' + nis;
+
+        });
+    }
+    function hapus_nilai(id) {
+        swal({
+            icon: 'warning',
+            title: 'Peringatan: ',
+            text: 'Yakin ingin menghapus nilai?',
+            buttons: {
+                confirm: {
+                    text: 'Hapus',
+                    className: 'btn btn-danger'
+                },
+                cancel: {
+                    visible: 'true',
+                    className: 'btn btn-success'
+                }
+            }
+        }).then((result) => {
+            if (result)
+                document.location.href = 'Hapus_nilai/' + id;
 
         });
     }

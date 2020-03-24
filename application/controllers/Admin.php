@@ -9,9 +9,13 @@ class Admin extends CI_Controller
 		parent::__construct();
 		$this->load->model('M_Admin', 'Admin');
 		$this->load->model('M_Siswa', 'Siswa');
+		$this->load->model('M_Nilai', 'Nilai');
 		$this->data['siswa'] = $this->Siswa->get_list();
 		$this->data['total'] = $this->Siswa->count();
 		$this->data['kelas'] = $this->Siswa->get_kelas();
+		$this->data['nilai'] = $this->Nilai->get_list();
+		$this->data['count'] = $this->Nilai->count();
+		$this->data['listnama'] = $this->Nilai->get_siswa();
 	}
 
 	public function index()
@@ -21,12 +25,12 @@ class Admin extends CI_Controller
 
 	public function Kriteria()
 	{
-		$this->load->view('interface/kriteria',$this->data);
+		$this->load->view('interface/kriteria', $this->data);
 	}
 
 	public function Siswa()
 	{
-		
+
 
 		$this->load->view('interface/siswa', $this->data);
 	}
@@ -36,6 +40,15 @@ class Admin extends CI_Controller
 			$this->Siswa->save();
 			// echo json_encode($data);
 			redirect("Admin/Siswa");
+		}
+	}
+	public function Tambah_nilai()
+	{
+		if ($this->input->post('submit')) {
+			// echo json_encode($data);
+			$this->Nilai->save();
+
+			redirect("Admin/Nilai");
 		}
 	}
 	public function Edit_siswa($nis)
@@ -51,6 +64,11 @@ class Admin extends CI_Controller
 		$this->Siswa->delete($nis);
 		redirect("Admin/Siswa");
 	}
+	public function Hapus_nilai($id)
+	{
+		$this->Nilai->delete($id);
+		redirect("Admin/Nilai");
+	}
 	public function Alternatif()
 	{
 		$this->load->view('interface/alternatif');
@@ -58,7 +76,7 @@ class Admin extends CI_Controller
 
 	public function Nilai()
 	{
-		$this->load->view('interface/nilai');
+		$this->load->view('interface/nilai',$this->data);
 	}
 
 	public function Proses()
