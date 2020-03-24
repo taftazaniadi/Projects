@@ -41,15 +41,7 @@
                                 <div class="card-header">
                                     <div class="d-flex align-items-center">
                                         <h4 class="card-title">Tabel Data Kriteria</h4>
-                                        <button class="btn btn-primary btn-round ml-auto" data-toggle="modal" data-target="#addRowModal">
-                                            <i class="fa fa-plus"></i>
-                                            Tambah Kriteria
-                                        </button>
-                                        &nbsp; &nbsp;
-                                        <button class="btn btn-danger btn-round remove">
-                                            <i class="fa fa-trash"></i>
-                                            Hapus Kriteria
-                                        </button>
+                                        
                                     </div>
                                 </div>
                                 <div class="card-body">
@@ -112,15 +104,36 @@
                                         <table id="add-row" class="display table table-striped table-hover">
                                             <thead>
                                                 <tr>
-                                                    <th>ID Kriteria</th>
+                                                    <th>No</th>
                                                     <th>Nama Kriteria</th>
-                                                    <th>Jenis Kriteria</th>
-                                                    <th>Bobot Kriteria</th>
-                                                    <th style="width: 10%">Action</th>
+                                                    <th>Memuaskan</th>
+                                                    <th>Baik</th>
+                                                    <th>Kurang</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-
+                                                <tr>
+                                                    <td>1</td>
+                                                    <td>Akademik</td>
+                                                    <td>80 - 100</td>
+                                                    <td>75 - 79</td>
+                                                    <td><75</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>2</td>
+                                                    <td>Prestasi</td>
+                                                    <td>6 - 10</td>
+                                                    <td>1 - 5</td>
+                                                    <td>N/A</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>3</td>
+                                                    <td>Sikap</td>
+                                                    <td>70 - 100</td>
+                                                    <td>N/A</td>
+                                                    <td><70</td>
+                                                </tr>
+                                            
                                             </tbody>
                                         </table>
                                     </div>
