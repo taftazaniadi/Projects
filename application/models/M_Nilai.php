@@ -2,6 +2,8 @@
     defined('BASEPATH') or exit('No direct script access allowed');
 class M_Nilai extends CI_Model{
     public function get_list(){
+        $this->db->select('*,nilai.id as nid,kriteria.nama as knama');
+        $this->db->join('kriteria','kriteria.id = nilai.kriteria');
         $this->db->join('siswa','siswa.nis = nilai.siswa');
         return $this->db->get('nilai')->result();
     }

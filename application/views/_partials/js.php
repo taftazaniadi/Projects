@@ -138,12 +138,14 @@
         id = data.children().eq(0).attr('value');
         nis = data.children().eq(0).attr('nis');
         semester = data.children().eq(1).attr('value');
-        akademik = data.children().eq(2).html();
-        prestasi = data.children().eq(3).html();
-        sikap = data.children().eq(4).html();
+        kriteria = data.children().eq(2).attr('value');
+        akademik = data.children().eq(3).html();
+        prestasi = data.children().eq(4).html();
+        sikap = data.children().eq(5).html();
 
         $('#editSiswa').val(nis);
         $('#editSmt').val(semester);
+        $('#editKriteria').val(kriteria);
         $('#editnilai').val(akademik);
         $('#editnormalisasi').val(prestasi);
         $('#editpreferensi').val(sikap);

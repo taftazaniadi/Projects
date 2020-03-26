@@ -7,6 +7,7 @@ class M_Parameter extends CI_Model
         return $this->db->get('parameter')->row();
     }
     public function get_list(){
+        $this->db->select('*, parameter.id as pid');
         $this->db->join('kriteria','parameter.kriteria = kriteria.id');
         return $this->db->get('parameter')->result();
     }

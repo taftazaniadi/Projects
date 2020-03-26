@@ -214,14 +214,14 @@
 
                                                         echo '
                                                         <tr>
-                                                            <td>' . $data->id . '</td>
+                                                            <td>' . $data->pid . '</td>
                                                             <td>' . $data->nama . ' ('.$data->jenis.')</td>
                                                             <td>' . $data->parameter_nilai . '</td>
                                                             <td>' . $data->bobot_parameter . '</td>
                                                             <td>' . $data->keterangan . '</td>
                                                             <td class="action">
                                                             <button class="edit-parameter btn btn-success btn-sm" data-toggle="modal" data-target="#editRowModal"><i class="fa fa-pen"></i> Edit</button>
-                                                            <button onclick="hapus_parameter(' . $data->id . ')" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> Hapus</button></td>
+                                                            <button onclick="hapus_parameter(' . $data->pid . ')" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> Hapus</button></td>
                                                         </tr>
                                                         ';
                                                     }

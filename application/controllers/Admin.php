@@ -102,6 +102,7 @@ class Admin extends CI_Controller
 			$this->Nilai->edit($id);
 			redirect("Admin/Nilai");
 		}
+		// echo json_encode($this->input->post);
 	}
 	public function Hapus_nilai($id)
 	{

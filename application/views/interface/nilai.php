@@ -86,7 +86,22 @@
                                                                 </div>
                                                             </div>
                                                         </div>
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <div class="form-group form-group-default">
+                                                                    <label>Kriteria</label>
+                                                                <select name='kriteria' class='form-control'>
+                                                                    <?php foreach ($listkriteria as $kriteria){
+                                                                        echo '
+                                                                        <option value="'.$kriteria->id.'">'.$kriteria->nama.' - ('.$kriteria->jenis.')</option>
+                                                                        ';
+                                                                    }
 
+                                                                    ?>
+                                                                </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                         <div class="row">
                                                             <div class="col-md-6">
                                                                 <div class="form-group form-group-default">
@@ -163,7 +178,22 @@
                                                                 </div>
                                                             </div>
                                                         </div>
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <div class="form-group form-group-default">
+                                                                    <label>Kriteria</label>
+                                                                <select  id="editKriteria" name='kriteria' class='form-control'>
+                                                                    <?php foreach ($listkriteria as $kriteria){
+                                                                        echo '
+                                                                        <option value="'.$kriteria->id.'">'.$kriteria->nama.' - ('.$kriteria->jenis.')</option>
+                                                                        ';
+                                                                    }
 
+                                                                    ?>
+                                                                </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                         <div class="row">
                                                             <div class="col-md-6">
                                                                 <div class="form-group form-group-default">
@@ -218,6 +248,7 @@
                                                 <tr>
                                                     <th>Nama</th>
                                                     <th>Smt</th>
+                                                    <th style="max-width: 30px">Kriteria</th>
                                                     <th style="max-width: 30px">nilai</th>
                                                     <th style="max-width: 25px">normalisasi</th>
                                                     <th style="max-width: 25px">preferensi</th>
@@ -236,19 +267,20 @@
                                                         $avg = floor(($data->nilai + $data->normalisasi + $data->preferensi) / 3);
                                                         echo '
                                                         <tr>
-                                                            <td value="' . $data->id . '" nis="' . $data->siswa . '">' . $data->nama . '</td>
+                                                            <td value="' . $data->nid . '" nis="' . $data->siswa . '">' . $data->nama . '</td>
                                                             <td value="' . $data->semester . '">' . $strSmt[--$data->semester] . '</td>
+                                                            <td value="'.$data->kriteria.'">' . $data->knama . ' ('.$data->jenis.')</td>
                                                             <td>' . $data->nilai . '</td>
                                                             <td>' . $data->normalisasi . '</td>
                                                             <td>' . $data->preferensi . '</td>
                                                             <td class="action">
                                                             <button class="edit-nilai btn btn-success btn-sm" data-toggle="modal" data-target="#editRowModal"><i class="fa fa-pen"></i> Edit</button>
-                                                            <button onclick="hapus_nilai(' . $data->id . ')" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> Hapus</button></td>
+                                                            <button onclick="hapus_nilai(' . $data->nid . ')" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> Hapus</button></td>
                                                         </tr>
                                                         ';
                                                     }
                                                 } else {
-                                                    echo '<tr><td colspan=6 style="text-align:center">data kosong</td></tr>';
+                                                    echo '<tr><td colspan=7 style="text-align:center">data kosong</td></tr>';
                                                 }
                                                 ?>
                                             </tbody>
