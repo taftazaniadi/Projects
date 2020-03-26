@@ -147,7 +147,7 @@
                                                     </button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <p class="small">Tambah nilai baru</p>
+                                                    <p class="small">edit nilai</p>
                                                     <form action="#" method="POST" id="form-edit">
                                                         <div class="row">
                                                             <div class="col-md-12">
