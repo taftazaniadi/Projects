@@ -49,7 +49,7 @@
         value: 100,
         maxValue: 100,
         width: 7,
-        text: 3,
+        text: <?php echo $kriteria->c; ?>,
         colors: ['#f1f1f1', '#FF9E27'],
         duration: 400,
         wrpClass: 'circles-wrp',
@@ -133,6 +133,27 @@
 
         });
     }
+    function hapus_kriteria(id) {
+        swal({
+            icon: 'warning',
+            title: 'Peringatan: ',
+            text: 'Yakin ingin menghapus kriteria?',
+            buttons: {
+                confirm: {
+                    text: 'Hapus',
+                    className: 'btn btn-danger'
+                },
+                cancel: {
+                    visible: 'true',
+                    className: 'btn btn-success'
+                }
+            }
+        }).then((result) => {
+            if (result)
+                document.location.href = 'Hapus_kriteria/' + id;
+
+        });
+    }
     $('.edit-bt').on('click', function(e) {
         data = $(this).parent().parent();
         nis = data.children().eq(0).html();
@@ -162,6 +183,20 @@
         $('#editPrestasi').val(prestasi);
         $('#editSikap').val(sikap);
         $("#form-edit").attr('action','Edit_nilai/'+id);
+
+    });
+    $('.edit-kriteria').on('click', function(e) {
+        data = $(this).parent().parent();
+        id = data.children().eq(0).html();
+        nama = data.children().eq(1).html();
+        jenis=data.children().eq(2).html();
+        bobot = data.children().eq(3).html();
+        // console.log($(this).parent().parent()[0].children[0]);
+        // console.log(kelas+nama+nis);
+        $('#editNama').val(nama);
+        $('#editJenis').val(jenis);
+        $('#editBobot').val(bobot);
+        $("#form-edit").attr('action','Edit_kriteria/'+id);
 
     });
     $('.log-out').on('click', function(e) {

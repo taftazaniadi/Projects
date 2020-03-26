@@ -10,12 +10,17 @@ class Admin extends CI_Controller
 		$this->load->model('M_Admin', 'Admin');
 		$this->load->model('M_Siswa', 'Siswa');
 		$this->load->model('M_Nilai', 'Nilai');
+		$this->load->model('M_Kriteria', 'Kriteria');
 		$this->data['siswa'] = $this->Siswa->get_list();
 		$this->data['total'] = $this->Siswa->count();
 		$this->data['kelas'] = $this->Siswa->get_kelas();
 		$this->data['nilai'] = $this->Nilai->get_list();
 		$this->data['count'] = $this->Nilai->count();
 		$this->data['listnama'] = $this->Nilai->get_siswa();
+		$this->data['kriteria'] = $this->Kriteria->count();
+		$this->data['listkriteria'] = $this->Kriteria->get_list();
+
+
 	}
 
 	public function index()
@@ -26,8 +31,16 @@ class Admin extends CI_Controller
 	public function Kriteria()
 	{
 		$this->load->view('interface/kriteria', $this->data);
+		// echo json_encode($this->data['listkriteria']);
 	}
-
+	public function Tambah_kriteria()
+	{
+		if ($this->input->post('submit')) {
+			$this->Kriteria->save();
+			// echo json_encode($data);
+			redirect("Admin/Kriteria");
+		}
+	}
 	public function Siswa()
 	{
 
@@ -76,6 +89,19 @@ class Admin extends CI_Controller
 	{
 		$this->Nilai->delete($id);
 		redirect("Admin/Nilai");
+	}
+	public function Edit_kriteria($id)
+	{
+		if ($this->input->post('submit')) {
+			$this->Kriteria->edit($id);
+			// echo json_encode($data);
+			redirect("Admin/Kriteria");
+		}
+	}
+	public function Hapus_kriteria($id)
+	{
+		$this->Kriteria->delete($id);
+		redirect("Admin/Kriteria");
 	}
 	public function Alternatif()
 	{
