@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Mar 26, 2020 at 11:25 AM
+-- Generation Time: Mar 26, 2020 at 01:51 PM
 -- Server version: 5.7.24
 -- PHP Version: 7.2.19
 
@@ -82,7 +82,8 @@ CREATE TABLE `kriteria` (
 --
 
 INSERT INTO `kriteria` (`id`, `nama`, `jenis`, `bobot`) VALUES
-(1, 'akademik', 'benefit', 90);
+(4, 'akademik', 'benefit', 90),
+(5, 'prestasi', 'benefit', 54);
 
 -- --------------------------------------------------------
 
@@ -94,46 +95,53 @@ CREATE TABLE `nilai` (
   `id` int(11) NOT NULL,
   `siswa` int(11) NOT NULL,
   `semester` int(11) NOT NULL,
-  `akademik` int(11) NOT NULL,
-  `prestasi` int(11) NOT NULL,
-  `sikap` int(11) NOT NULL
+  `kriteria` int(11) NOT NULL,
+  `nilai` int(11) NOT NULL,
+  `normalisasi` float NOT NULL,
+  `preferensi` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `nilai`
 --
 
-INSERT INTO `nilai` (`id`, `siswa`, `semester`, `akademik`, `prestasi`, `sikap`) VALUES
-(1, 6100038, 1, 69, 1, 30),
-(2, 6100039, 1, 90, 1, 50),
-(3, 6100040, 1, 47, 5, 100),
-(4, 6100041, 1, 76, 0, 100),
-(5, 6100042, 1, 71, 0, 100),
-(6, 6100043, 1, 88, 0, 100),
-(7, 6100044, 1, 40, 0, 100),
-(8, 6100045, 1, 64, 0, 100),
-(9, 6100046, 1, 38, 0, 100),
-(10, 6100047, 1, 58, 0, 100),
-(11, 6100048, 1, 40, 0, 100),
-(12, 6100049, 1, 65, 1, 100),
-(13, 6100050, 1, 78, 0, 100),
-(14, 6100051, 1, 50, 2, 20),
-(15, 6100052, 1, 69, 0, 100),
-(16, 6100053, 1, 88, 0, 100),
-(17, 6100054, 1, 18, 0, 100),
-(18, 6100055, 1, 46, 3, 100),
-(19, 6100056, 1, 54, 0, 100),
-(20, 6100057, 1, 66, 0, 100),
-(21, 6100058, 1, 65, 0, 100),
-(22, 6100059, 1, 44, 0, 100),
-(23, 6100060, 1, 69, 0, 30),
-(24, 6100061, 1, 74, 0, 10),
-(25, 6100062, 1, 73, 0, 100),
-(26, 6100063, 1, 69, 0, 100),
-(27, 6100064, 1, 67, 0, 100),
-(28, 6100065, 1, 70, 1, 100),
-(29, 6100066, 1, 62, 1, 100),
-(30, 6100067, 1, 69, 1, 100);
+INSERT INTO `nilai` (`id`, `siswa`, `semester`, `kriteria`, `nilai`, `normalisasi`, `preferensi`) VALUES
+(33, 6100040, 1, 5, 90, 0.25, 0.6);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `parameter`
+--
+
+CREATE TABLE `parameter` (
+  `id` int(11) NOT NULL,
+  `kriteria` int(11) NOT NULL,
+  `parameter_nilai` varchar(50) NOT NULL,
+  `bobot_parameter` int(11) NOT NULL,
+  `keterangan` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `parameter`
+--
+
+INSERT INTO `parameter` (`id`, `kriteria`, `parameter_nilai`, `bobot_parameter`, `keterangan`) VALUES
+(3, 4, '>80 dan <98', 1, 'rata-rata');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ranking`
+--
+
+CREATE TABLE `ranking` (
+  `id` int(11) NOT NULL,
+  `siswa` int(11) NOT NULL,
+  `total` float NOT NULL,
+  `peringkat` int(11) NOT NULL,
+  `keputusan` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -235,6 +243,18 @@ ALTER TABLE `nilai`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `parameter`
+--
+ALTER TABLE `parameter`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `ranking`
+--
+ALTER TABLE `ranking`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `siswa`
 --
 ALTER TABLE `siswa`
@@ -266,13 +286,25 @@ ALTER TABLE `kelas`
 -- AUTO_INCREMENT for table `kriteria`
 --
 ALTER TABLE `kriteria`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `nilai`
 --
 ALTER TABLE `nilai`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+
+--
+-- AUTO_INCREMENT for table `parameter`
+--
+ALTER TABLE `parameter`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `ranking`
+--
+ALTER TABLE `ranking`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
