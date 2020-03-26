@@ -205,7 +205,7 @@
                                                         ';
                                                     }
                                                 } else {
-                                                    echo '<tr><td>data kosong</td></tr>';
+                                                    echo '<tr><td  colspan=5 style="text-align:center">data kosong</td></tr>';
                                                 }
                                                 ?>
                                             </tbody>

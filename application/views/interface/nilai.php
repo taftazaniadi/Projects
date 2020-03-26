@@ -101,20 +101,20 @@
                                                             </div>
                                                             <div class="col-md-6">
                                                                 <div class="form-group form-group-default">
-                                                                    <label>Akademik</label>
-                                                                    <input name="akademik" type="number" class="form-control" placeholder="ex: 90">
+                                                                    <label>nilai</label>
+                                                                    <input name="nilai" type="number" class="form-control" placeholder="ex: 90">
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-6">
                                                                 <div class="form-group form-group-default">
-                                                                    <label>Prestasi</label>
-                                                                    <input name="prestasi" type="number" class="form-control" placeholder="ex: 1">
+                                                                    <label>normalisasi</label>
+                                                                    <input name="normalisasi" type="number" step="0.01" class="form-control" placeholder="ex: 0.25">
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-6">
                                                                 <div class="form-group form-group-default">
-                                                                    <label>Sikap</label>
-                                                                    <input name="sikap" type="number" class="form-control" placeholder="ex: 100">
+                                                                    <label>preferensi</label>
+                                                                    <input name="preferensi" type="number" step="0.01" class="form-control" placeholder="ex: 0.6">
                                                                 </div>
                                                             </div>
 
@@ -178,20 +178,20 @@
                                                             </div>
                                                             <div class="col-md-6">
                                                                 <div class="form-group form-group-default">
-                                                                    <label>Akademik</label>
-                                                                    <input id="editAkademik" name="akademik" type="number" class="form-control" placeholder="ex: 90">
+                                                                    <label>nilai</label>
+                                                                    <input id="editnilai" name="nilai" type="number" class="form-control" placeholder="ex: 90">
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-6">
                                                                 <div class="form-group form-group-default">
-                                                                    <label>Prestasi</label>
-                                                                    <input id="editPrestasi" name="prestasi" type="number" class="form-control" placeholder="ex: 1">
+                                                                    <label>normalisasi</label>
+                                                                    <input id="editnormalisasi" name="normalisasi" type="number" step="0.01" class="form-control" placeholder="ex: 0.25">
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-6">
                                                                 <div class="form-group form-group-default">
-                                                                    <label>Sikap</label>
-                                                                    <input id="editSikap" name="sikap" type="number" class="form-control" placeholder="ex: 100">
+                                                                    <label>preferensi</label>
+                                                                    <input id="editpreferensi" name="preferensi" type="number" step="0.01" class="form-control" placeholder="ex: 0.6">
                                                                 </div>
                                                             </div>
 
@@ -218,9 +218,9 @@
                                                 <tr>
                                                     <th>Nama</th>
                                                     <th>Smt</th>
-                                                    <th style="max-width: 30px">Akademik</th>
-                                                    <th style="max-width: 25px">Prestasi</th>
-                                                    <th style="max-width: 25px">Sikap</th>
+                                                    <th style="max-width: 30px">nilai</th>
+                                                    <th style="max-width: 25px">normalisasi</th>
+                                                    <th style="max-width: 25px">preferensi</th>
                                                     <th style="width: 25%">Action</th>
                                                 </tr>
                                             </thead>
@@ -233,14 +233,14 @@
                                                     array_push($strSmt, 'genap');
                                                     foreach ($nilai as $data) {
 
-                                                        $avg = floor(($data->akademik + $data->prestasi + $data->sikap) / 3);
+                                                        $avg = floor(($data->nilai + $data->normalisasi + $data->preferensi) / 3);
                                                         echo '
                                                         <tr>
                                                             <td value="' . $data->id . '" nis="' . $data->siswa . '">' . $data->nama . '</td>
                                                             <td value="' . $data->semester . '">' . $strSmt[--$data->semester] . '</td>
-                                                            <td>' . $data->akademik . '</td>
-                                                            <td>' . $data->prestasi . '</td>
-                                                            <td>' . $data->sikap . '</td>
+                                                            <td>' . $data->nilai . '</td>
+                                                            <td>' . $data->normalisasi . '</td>
+                                                            <td>' . $data->preferensi . '</td>
                                                             <td class="action">
                                                             <button class="edit-nilai btn btn-success btn-sm" data-toggle="modal" data-target="#editRowModal"><i class="fa fa-pen"></i> Edit</button>
                                                             <button onclick="hapus_nilai(' . $data->id . ')" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> Hapus</button></td>
@@ -248,7 +248,7 @@
                                                         ';
                                                     }
                                                 } else {
-                                                    echo '<tr><td>data kosong</td></tr>';
+                                                    echo '<tr><td colspan=6 style="text-align:center">data kosong</td></tr>';
                                                 }
                                                 ?>
                                             </tbody>

@@ -22,6 +22,11 @@ class Admin extends CI_Controller
 		$this->load->model('M_Kriteria', 'Kriteria');
 		$this->data['kriteria'] = $this->Kriteria->count();//data statistik->partial/js.php
 		$this->data['listkriteria'] = $this->Kriteria->get_list();
+		//load data parameter
+		$this->load->model('M_Parameter', 'Parameter');
+		$this->data['listparameter'] = $this->Parameter->get_list();
+
+
 	}
 
 	public function index()
@@ -103,10 +108,29 @@ class Admin extends CI_Controller
 		$this->Nilai->delete($id);
 		redirect("Admin/Nilai");
 	}
-	//alternatif
-	public function Alternatif()
+	//parameter
+	public function Parameter()
 	{
-		$this->load->view('interface/alternatif');
+		$this->load->view('interface/parameter',$this->data);
+	}
+	public function Tambah_parameter()
+	{
+		if ($this->input->post('submit')) {
+			$this->Parameter->save();
+			redirect("Admin/Parameter");
+		}
+	}
+	public function Edit_parameter($id)
+	{
+		if ($this->input->post('submit')) {
+			$this->Parameter->edit($id);
+			redirect("Admin/Parameter");
+		}
+	}
+	public function Hapus_parameter($id)
+	{
+		$this->Parameter->delete($id);
+		redirect("Admin/Parameter");
 	}
 	//proses
 	public function Proses()

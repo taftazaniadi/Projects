@@ -41,6 +41,11 @@
                                 </a>
                             </li>
                             <li>
+                                <a href="<?= base_url('Admin/Parameter') ?>">
+                                    <span class="sub-item">Parameter</span>
+                                </a>
+                            </li>
+                            <li>
                                 <a href="<?= base_url('Admin/Siswa') ?>">
                                     <span class="sub-item">Siswa</span>
                                 </a>

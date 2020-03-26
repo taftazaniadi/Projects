@@ -30,7 +30,7 @@
                     <div class="page-inner py-5">
                         <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
                             <div>
-                                <h2 class="text-white pb-2 fw-bold">Data kriteria</h2>
+                                <h2 class="text-white pb-2 fw-bold">Data Parameter</h2>
                                 <h5 class="text-white op-7 mb-2">Sistem Penunjang Keputusan - Metode SAW</h5>
                             </div>
                         </div>
@@ -45,10 +45,10 @@
                             <div class="card">
                                 <div class="card-header">
                                     <div class="d-flex align-items-center">
-                                        <h4 class="card-title">Tabel Data kriteria</h4>
+                                        <h4 class="card-title">Tabel Data Parameter</h4>
                                         <button class="btn btn-primary btn-round ml-auto" data-toggle="modal" data-target="#addRowModal">
                                             <i class="fa fa-plus"></i>
-                                            Tambah kriteria
+                                            Tambah Parameter
                                         </button>
                                     </div>
                                 </div>
@@ -62,7 +62,7 @@
                                                         <span class="fw-mediumbold">
                                                             Data</span>
                                                         <span class="fw-light">
-                                                            kriteria
+                                                            Parameter
                                                         </span>
                                                     </h5>
                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -70,13 +70,21 @@
                                                     </button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <p class="small">Tambah kriteria baru</p>
-                                                    <form action="Tambah_kriteria" method="POST">
+                                                    <p class="small">Tambah Parameter baru</p>
+                                                    <form action="Tambah_Parameter" method="POST">
                                                         <div class="row">
                                                             <div class="col-md-12">
                                                                 <div class="form-group form-group-default">
-                                                                    <label>Nama</label>
-                                                                    <input name='nama' type='text' class='form-control' placeholder='ex: Akademik'>
+                                                                    <label>Kriteria</label>
+                                                                <select name='kriteria' class='form-control'>
+                                                                    <?php foreach ($listkriteria as $kriteria){
+                                                                        echo '
+                                                                        <option value="'.$kriteria->id.'">'.$kriteria->nama.' - ('.$kriteria->jenis.')</option>
+                                                                        ';
+                                                                    }
+
+                                                                    ?>
+                                                                </select>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -84,17 +92,25 @@
                                                         <div class="row">
                                                             <div class="col-md-6">
                                                                 <div class="form-group form-group-default">
-                                                                    <label>Jenis</label>
-                                                                    <input name='jenis' type='text' class='form-control' placeholder='ex: Benefit'>
+                                                                    <label>Parameter nilai</label>
+                                                                    <input name='parameter_nilai' type='text' class='form-control' placeholder='ex: > 80'>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-6">
                                                                 <div class="form-group form-group-default">
-                                                                    <label>Bobot</label>
-                                                                    <input name="bobot" type="number" class="form-control" placeholder="ex: 90">
+                                                                    <label>Bobot Parameter</label>
+                                                                    <input name="bobot_parameter" type="number" class="form-control" placeholder="ex: 1">
                                                                 </div>
                                                             </div>
 
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <div class="form-group form-group-default">
+                                                                    <label>Keterangan</label>
+                                                                    <input name='keterangan' type='text' class='form-control' placeholder='ex: Rata-rata prestasi'>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                         <div class="modal-footer no-bd">
                                                             <input type="submit" name="submit" value="submit" class="btn btn-primary"></input>
@@ -115,7 +131,7 @@
                                                         <span class="fw-mediumbold">
                                                             Data</span>
                                                         <span class="fw-light">
-                                                            kriteria
+                                                            Parameter
                                                         </span>
                                                     </h5>
                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -123,13 +139,21 @@
                                                     </button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <p class="small">Edit kriteria</p>
+                                                    <p class="small">Tambah Parameter baru</p>
                                                     <form action="" method="POST" id="form-edit">
                                                         <div class="row">
                                                             <div class="col-md-12">
                                                                 <div class="form-group form-group-default">
-                                                                    <label>Nama</label>
-                                                                    <input id="editNama" name='nama' type='text' class='form-control' placeholder='ex: Akademik'>
+                                                                    <label>Kriteria</label>
+                                                                <select id="editKriteria" name='kriteria' class='form-control'>
+                                                                    <?php foreach ($listkriteria as $kriteria){
+                                                                        echo '
+                                                                        <option value="'.$kriteria->id.'">'.$kriteria->nama.' - ('.$kriteria->jenis.')</option>
+                                                                        ';
+                                                                    }
+
+                                                                    ?>
+                                                                </select>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -137,17 +161,25 @@
                                                         <div class="row">
                                                             <div class="col-md-6">
                                                                 <div class="form-group form-group-default">
-                                                                    <label>Jenis</label>
-                                                                    <input id="editJenis" name='jenis' type='text' class='form-control' placeholder='ex: Benefit'>
+                                                                    <label>Parameter nilai</label>
+                                                                    <input id="editParam" name='parameter_nilai' type='text' class='form-control' placeholder='ex: > 80'>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-6">
                                                                 <div class="form-group form-group-default">
-                                                                    <label>Bobot</label>
-                                                                    <input id="editBobot" name="bobot" type="number" class="form-control" placeholder="ex: 90">
+                                                                    <label>Bobot Parameter</label>
+                                                                    <input id="editBobot" name="bobot_parameter" type="number" class="form-control" placeholder="ex: 1">
                                                                 </div>
                                                             </div>
 
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <div class="form-group form-group-default">
+                                                                    <label>Keterangan</label>
+                                                                    <input id="editKet" name='keterangan' type='text' class='form-control' placeholder='ex: Rata-rata prestasi'>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                         <div class="modal-footer no-bd">
                                                             <input type="submit" name="submit" value="submit" class="btn btn-primary"></input>
@@ -168,31 +200,33 @@
                                             <thead>
                                                 <tr>
                                                     <th>ID</th>
-                                                    <th>Nama</th>
-                                                    <th>Jenis</th>
-                                                    <th>Bobot</th>
+                                                    <th>kriteria</th>
+                                                    <th>Parameter Nilai</th>
+                                                    <th>Bobot Parameter</th>
+                                                    <th>Keterangan</th>
                                                     <th style="width: 25%">Kelola</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <?php
-                                                if (!empty($listkriteria)) {
-                                                    foreach ($listkriteria as $data) {
+                                                if (!empty($listparameter)) {
+                                                    foreach ($listparameter as $data) {
 
                                                         echo '
                                                         <tr>
                                                             <td>' . $data->id . '</td>
-                                                            <td>' . $data->nama . '</td>
-                                                            <td>' . $data->jenis . '</td>
-                                                            <td>' . $data->bobot . '</td>
+                                                            <td>' . $data->nama . ' ('.$data->jenis.')</td>
+                                                            <td>' . $data->parameter_nilai . '</td>
+                                                            <td>' . $data->bobot_parameter . '</td>
+                                                            <td>' . $data->keterangan . '</td>
                                                             <td class="action">
-                                                            <button class="edit-kriteria btn btn-success btn-sm" data-toggle="modal" data-target="#editRowModal"><i class="fa fa-pen"></i> Edit</button>
-                                                            <button onclick="hapus_kriteria(' . $data->id . ')" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> Hapus</button></td>
+                                                            <button class="edit-parameter btn btn-success btn-sm" data-toggle="modal" data-target="#editRowModal"><i class="fa fa-pen"></i> Edit</button>
+                                                            <button onclick="hapus_parameter(' . $data->id . ')" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> Hapus</button></td>
                                                         </tr>
                                                         ';
                                                     }
                                                 } else {
-                                                    echo '<tr><td  colspan=5 style="text-align:center">data kosong</td></tr>';
+                                                    echo '<tr><td colspan=6 style="text-align:center">data kosong</td></tr>';
                                                 }
                                                 ?>
                                             </tbody>

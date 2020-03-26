@@ -43,6 +43,12 @@
 <script src="<?= base_url() ?>assets/js/setting-demo.js"></script>
 <!-- <script src="<?= base_url() ?>assets/js/demo.js"></script> -->
 <script>
+    function htmlDecode(input) {
+        var e = document.createElement('div');
+        e.innerHTML = input;
+        return e.childNodes.length === 0 ? "" : e.childNodes[0].nodeValue;
+    }
+    //statistik
     Circles.create({
         id: 'circles-1',
         radius: 45,
@@ -91,6 +97,20 @@
 </script>
 
 <script>
+    //siswa edit & hapus
+    $('.edit-bt').on('click', function(e) {
+        data = $(this).parent().parent();
+        nis = data.children().eq(0).html();
+        nama = data.children().eq(1).html();
+        kelas = data.children().eq(2).attr('value');
+
+        $('#editNis').val(nis);
+        $('#editNama').val(nama);
+        $('#editKelas').val(kelas);
+        $("#form-edit").attr('action', 'Edit_siswa/' + nis);
+
+    });
+
     function hapus_siswa(nis) {
         swal({
             icon: 'warning',
@@ -112,6 +132,25 @@
 
         });
     }
+    //nilai edit & hapus
+    $('.edit-nilai').on('click', function(e) {
+        data = $(this).parent().parent();
+        id = data.children().eq(0).attr('value');
+        nis = data.children().eq(0).attr('nis');
+        semester = data.children().eq(1).attr('value');
+        akademik = data.children().eq(2).html();
+        prestasi = data.children().eq(3).html();
+        sikap = data.children().eq(4).html();
+
+        $('#editSiswa').val(nis);
+        $('#editSmt').val(semester);
+        $('#editnilai').val(akademik);
+        $('#editnormalisasi').val(prestasi);
+        $('#editpreferensi').val(sikap);
+        $("#form-edit").attr('action', 'Edit_nilai/' + id);
+
+    });
+
     function hapus_nilai(id) {
         swal({
             icon: 'warning',
@@ -133,6 +172,21 @@
 
         });
     }
+    //kriteria edit & hapus
+    $('.edit-kriteria').on('click', function(e) {
+        data = $(this).parent().parent();
+        id = data.children().eq(0).html();
+        nama = data.children().eq(1).html();
+        jenis = data.children().eq(2).html();
+        bobot = data.children().eq(3).html();
+
+        $('#editNama').val(nama);
+        $('#editJenis').val(jenis);
+        $('#editBobot').val(bobot);
+        $("#form-edit").attr('action', 'Edit_kriteria/' + id);
+
+    });
+
     function hapus_kriteria(id) {
         swal({
             icon: 'warning',
@@ -154,51 +208,48 @@
 
         });
     }
-    $('.edit-bt').on('click', function(e) {
-        data = $(this).parent().parent();
-        nis = data.children().eq(0).html();
-        nama = data.children().eq(1).html();
-        kelas=data.children().eq(2).attr('value');
-        // console.log($(this).parent().parent()[0].children[0]);
-        // console.log(kelas+nama+nis);
-        $('#editNis').val(nis);
-        $('#editNama').val(nama);
-        $('#editKelas').val(kelas);
-        $("#form-edit").attr('action','Edit_siswa/'+nis);
-
-    });
-    $('.edit-nilai').on('click', function(e) {
-        data = $(this).parent().parent();
-        id = data.children().eq(0).attr('value');
-        nis = data.children().eq(0).attr('nis');
-        semester=data.children().eq(1).attr('value');
-        akademik = data.children().eq(2).html();
-        prestasi = data.children().eq(3).html();
-        sikap = data.children().eq(4).html();
-        // console.log($(this).parent().parent()[0].children[0]);
-        // console.log(kelas+nama+nis);
-        $('#editSiswa').val(nis);
-        $('#editSmt').val(semester);
-        $('#editAkademik').val(akademik);
-        $('#editPrestasi').val(prestasi);
-        $('#editSikap').val(sikap);
-        $("#form-edit").attr('action','Edit_nilai/'+id);
-
-    });
-    $('.edit-kriteria').on('click', function(e) {
+    //kriteria edit & hapus
+    $('.edit-parameter').on('click', function(e) {
         data = $(this).parent().parent();
         id = data.children().eq(0).html();
-        nama = data.children().eq(1).html();
-        jenis=data.children().eq(2).html();
+        kriteria = data.children().eq(1).attr('value');
+        parameter = htmlDecode(data.children().eq(2).html());
         bobot = data.children().eq(3).html();
-        // console.log($(this).parent().parent()[0].children[0]);
-        // console.log(kelas+nama+nis);
-        $('#editNama').val(nama);
-        $('#editJenis').val(jenis);
+        keterangan = data.children().eq(4).html();
+
+        $('#editKriteria').val(kriteria);
+        $('#editParam').val(parameter);
         $('#editBobot').val(bobot);
-        $("#form-edit").attr('action','Edit_kriteria/'+id);
+        $('#editKet').val(keterangan);
+        $("#form-edit").attr('action', 'Edit_parameter/' + id);
 
     });
+
+    function hapus_parameter(id) {
+        swal({
+            icon: 'warning',
+            title: 'Peringatan: ',
+            text: 'Yakin ingin menghapus parameter?',
+            buttons: {
+                confirm: {
+                    text: 'Hapus',
+                    className: 'btn btn-danger'
+                },
+                cancel: {
+                    visible: 'true',
+                    className: 'btn btn-success'
+                }
+            }
+        }).then((result) => {
+            if (result)
+                document.location.href = 'Hapus_parameter/' + id;
+
+        });
+    }
+
+
+
+
     $('.log-out').on('click', function(e) {
         e.preventDefault();
         const href = $(this).attr('href');
