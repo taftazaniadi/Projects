@@ -140,13 +140,19 @@
     </div>
 
     <?php $this->load->view("_partials/js.php") ?>
-    <script>
-        swal({
-            icon: 'success',
-            title: 'Hello, <?= $this->fungsi->user_login()->Nama ?>',
-            text: 'Welcome to SPK Systems'
-        });
-    </script>
+    <?php if ($this->session->userdata('notif')) {
+        $this->session->set_userdata('notif', false)
+    ?>
+        <script>
+            swal({
+                icon: 'success',
+                title: 'Hello, <?= $this->fungsi->user_login()->Nama ?>',
+                text: 'Welcome to SPK Systems'
+            });
+        </script>
+
+    <?php } ?>
+
 </body>
 
 </html>

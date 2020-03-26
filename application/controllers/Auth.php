@@ -33,10 +33,11 @@ class Auth extends CI_Controller
 
 				if ($level == 1) {
 					$this->session->set_flashdata('Auth', $params['Nama']);
+				$this->session->set_userdata('notif',true);
+
 					echo "<script>window.location='" . base_url('Admin') . "'</script>";
 				} else {
 					$this->session->set_flashdata('Auth', 'Username/Password tidak diketahui');
-					// echo "<script>alert('Silahkan login lagi')</script>";
 				}
 			} else {
 				$this->session->set_flashdata('Auth', 'Gagal');
