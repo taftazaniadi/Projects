@@ -49,7 +49,6 @@
                                         <div class="timeline-body">
                                             <ol style="text-align: justify">
                                                 <li>Tambahkan Data Kriteria Atau Tes Pada Menu Data Kriteria.</li>
-                                                <li>Tambahkan Data Parameter Atau Tolak Ukur Nilai Setiap Kriteria Pada Menu Data Parameter.</li>
                                                 <li>Tambahkan Data Alternatif Atau Calon Siswa Baru Yang Mendaftar Pada Menu Data Alternatif.</li>
                                                 <li>Tambahkan Data Nilai Kriteria Yang Didapatkan Setiap Alternatif Pada Menu Data Nilai.</li>
                                                 <li>Tekan Menu Proses Nilai Untuk Melihat Hasil Nilai Akhir Seleksi Calon Siswa Baru.</li>
@@ -70,20 +69,7 @@
                                         </div>
                                     </div>
                                 </li>
-                                <li class="timeline-inverted">
-                                    <div class="timeline-badge warning"><i class="flaticon-alarm-1"></i></div>
-                                    <div class="timeline-panel">
-                                        <div class="timeline-heading">
-                                            <h4 class="timeline-title"><strong>Apa itu Parameter</strong></h4>
-                                        </div>
-                                        <div class="timeline-body">
-                                            <p style="text-align: justify">
-                                                Parameter merupakan tolak ukur nilai yang ditetapkan pada setiap kriteria untuk mendapatkan bobot parameter pada saat memberikan penilaian terhadap setiap alternatif.
-                                            </p>
-                                        </div>
-
-                                    </div>
-                                </li>
+                                
                                 <li class="timeline-inverted">
                                     <div class="timeline-badge warning"><i class="flaticon-alarm-1"></i></div>
                                     <div class="timeline-panel">
@@ -107,7 +93,6 @@
                                             <ol style="text-align: justify">
                                                 <li>Data Kriteria Yang Ditetapkan Minimal 3 dan Maksimal 10.</li>
                                                 <li>Bobot Kriteria Yang Ditetapkan Jumlahnya Wajib 100.</li>
-                                                <li>Data Parameter Wajib Ditambahkan Setelah Menambahkan Data Kriteria.</li>
                                                 <li>Proses Nilai Tidak Dapat Dilakukan Jika Data Kriteria Kurang Dari 3 Atau Bobot Kriteria Jumlahnya Kurang Dari 100 Atau Tidak Terdapat Data Nilai Setiap Alternatif.</li>
                                             </ol>
                                         </div>
@@ -123,7 +108,6 @@
                                             <ol style="text-align: justify">
                                                 <li>Pada Menu Data Kriteria Fungsi Tombol Hapus Semua Kriteria Untuk Menghapus Seluruh Data Kriteria.</li>
                                                 <li>Pada Menu Data Nilai Fungsi Tombol Hapus Untuk Menghapus Data Nilai Alternatif Berdasarkan ID Alternatif.</li>
-                                                <li>Pada Menu Data Nilai Fungsi Tombol Hapus Semua Nilai Untuk Menghapus Seluruh Data Nilai Alternatif.</li>
                                                 <li>Pada Menu Proses Nilai Tombol Unduh Laporan Digunakan Untuk Mengunduh Laporan Hasil Seleksi Calon Siswa Baru Dengan Format PDF.</li>
                                             </ol>
                                         </div>
@@ -135,7 +119,7 @@
                 </div>
             </div>
 
-            <?php $this->load->view("_partials/footer.php") ?>
+            <?php //$this->load->view("_partials/footer.php") ?>
         </div>
     </div>
 

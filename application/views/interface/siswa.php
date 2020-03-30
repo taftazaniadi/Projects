@@ -196,11 +196,11 @@
                                                         <tr>
                                                             <td>' . $data->nis . '</td>
                                                             <td>' . $data->nama . '</td>
-                                                            <td value="'.$data->kelas.'">' . $data->alias . '</td>
+                                                            <td value="' . $data->kelas . '">' . $data->alias . '</td>
                                                             <td>' . $data->jurusan . '</td>
                                                             <td class="action">
                                                             <button class="edit-bt btn btn-success btn-sm" data-toggle="modal" data-target="#editRowModal"><i class="fa fa-pen"></i> Edit</button>
-                                                            <button onclick="hapus_siswa('.$data->nis.')" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> Hapus</button></td>
+                                                            <button onclick="hapus_siswa(' . $data->nis . ')" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> Hapus</button></td>
                                                         </tr>
                                                         ';
                                                     }
