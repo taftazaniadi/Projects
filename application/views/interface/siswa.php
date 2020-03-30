@@ -191,7 +191,7 @@
                                                     <th>Nama</th>
                                                     <th>Kelas</th>
                                                     <th>Jurusan</th>
-                                                    <th style="width: 25%">Action</th>
+                                                    <th style="width: 25%">Kelola</th>
                                                 </tr>
                                             </thead>
                                             <tbody>

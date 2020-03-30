@@ -228,12 +228,10 @@
                                             <thead>
                                                 <tr>
                                                     <th>Nama</th>
-                                                    <th>Smt</th>
+                                                    <th>Semester</th>
                                                     <th style="max-width: 30px">Kriteria</th>
-                                                    <th style="max-width: 30px">nilai</th>
-                                                    <th style="max-width: 25px">normalisasi</th>
-                                                    <th style="max-width: 25px">preferensi</th>
-                                                    <th style="width: 25%">Action</th>
+                                                    <th style="max-width: 30px">Nilai</th>
+                                                    <th style="width: 25%">Kelola</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -252,8 +250,6 @@
                                                             <td value="' . $data->semester . '">' . $strSmt[--$data->semester] . '</td>
                                                             <td value="' . $data->kriteria . '">' . $data->knama . ' (' . $data->jenis . ')</td>
                                                             <td>' . $data->nilai . '</td>
-                                                            <td>' . $data->normalisasi . '</td>
-                                                            <td>' . $data->preferensi . '</td>
                                                             <td class="action">
                                                             <button class="edit-nilai btn btn-success btn-sm" data-toggle="modal" data-target="#editRowModal"><i class="fa fa-pen"></i> Edit</button>
                                                             <button onclick="hapus_nilai(' . $data->nid . ')" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> Hapus</button></td>

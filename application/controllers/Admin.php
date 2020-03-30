@@ -140,6 +140,7 @@ class Admin extends CI_Controller
 		$this->data['err'] = $err;
 		$this->load->view('interface/proses', $this->data);
 	}
+	//SAW
 	public function Hasil()
 	{
 		//mereset perhitungan sebelumnya (jika ada)

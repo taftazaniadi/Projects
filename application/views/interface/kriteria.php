@@ -92,7 +92,10 @@
                                                             <div class="col-md-6">
                                                                 <div class="form-group form-group-default">
                                                                     <label>Jenis</label>
-                                                                    <input name='jenis' type='text' class='form-control' placeholder='ex: Benefit'>
+                                                                    <select name='jenis' class="form-control">
+                                                                        <option value="benefit">benefit</option>
+                                                                        <option value="cost">cost</option>
+                                                                    </select>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-6">
@@ -145,7 +148,10 @@
                                                             <div class="col-md-6">
                                                                 <div class="form-group form-group-default">
                                                                     <label>Jenis</label>
-                                                                    <input id="editJenis" name='jenis' type='text' class='form-control' placeholder='ex: Benefit'>
+                                                                    <select id="editJenis" name='jenis' class="form-control">
+                                                                        <option value="benefit">benefit</option>
+                                                                        <option value="cost">cost</option>
+                                                                    </select>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-6">

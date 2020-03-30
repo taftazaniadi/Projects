@@ -79,6 +79,7 @@ class M_Nilai extends CI_Model
     public function get_result(){
         $this->db->select('siswa, sum(preferensi) as total');
         $this->db->group_by('siswa');
+        $this->db->order_by('sum(preferensi)','desc');
         return $this->db->get('nilai')->result();
     }
 }
