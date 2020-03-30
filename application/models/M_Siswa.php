@@ -33,7 +33,9 @@ class M_Siswa extends CI_Model{
         $this->db->where('nis',$nis);
         $this->db->delete('siswa');
     }
-    
+    public function reset(){
+        $this->db->empty_table('siswa');
+    }
 
 
 }

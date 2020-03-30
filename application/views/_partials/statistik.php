@@ -18,6 +18,11 @@
                         <div id="circles-4"></div>
                         <h6 class="fw-bold mt-3 mb-0">Nilai</h6>
                     </div>
+                    <div class="px-2 pb-2 pb-md-0 text-center">
+                        <div id="circles-5"></div>
+                        <h6 class="fw-bold mt-3 mb-0">Diterima</h6>
+                    </div>
+                    
                 </div>
             </div>
         </div>

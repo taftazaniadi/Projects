@@ -46,10 +46,17 @@
                                 <div class="card-header">
                                     <div class="d-flex align-items-center">
                                         <h4 class="card-title">Tabel Data kriteria</h4>
-                                        <button class="btn btn-primary btn-round ml-auto" data-toggle="modal" data-target="#addRowModal">
-                                            <i class="fa fa-plus"></i>
-                                            Tambah kriteria
-                                        </button>
+                                        <div class="" style="position: absolute;right:0;margin-right:15px;margin-top:-0px;">
+                                            <button class="btn btn-primary btn-round ml-auto" data-toggle="modal" data-target="#addRowModal">
+                                                <i class="fa fa-plus"></i>
+                                                Tambah kriteria
+                                            </button>
+                                            <button id="resetKriteria" class="btn btn-danger btn-round ml-auto">
+                                                <i class="fa fa-trash"></i>
+                                                Hapus semua
+                                            </button>
+                                        </div>
+
                                     </div>
                                 </div>
                                 <div class="card-body">

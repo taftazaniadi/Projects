@@ -46,10 +46,17 @@
                                 <div class="card-header">
                                     <div class="d-flex align-items-center">
                                         <h4 class="card-title">Tabel Data nilai</h4>
-                                        <button class="btn btn-primary btn-round ml-auto" data-toggle="modal" data-target="#addRowModal">
-                                            <i class="fa fa-plus"></i>
-                                            Tambah nilai
-                                        </button>
+                                        <div class="" style="position: absolute;right:0;margin-right:15px;margin-top:-0px;">
+                                            <button class="btn btn-primary btn-round ml-auto" data-toggle="modal" data-target="#addRowModal">
+                                                <i class="fa fa-plus"></i>
+                                                Tambah nilai
+                                            </button>
+                                            <button id="resetNilai" class="btn btn-danger btn-round ml-auto">
+                                                <i class="fa fa-trash"></i>
+                                                Hapus semua
+                                            </button>
+                                        </div>
+
                                     </div>
                                 </div>
                                 <div class="card-body">
@@ -90,15 +97,15 @@
                                                             <div class="col-md-12">
                                                                 <div class="form-group form-group-default">
                                                                     <label>Kriteria</label>
-                                                                <select name='kriteria' class='form-control'>
-                                                                    <?php foreach ($listkriteria as $kriteria){
-                                                                        echo '
-                                                                        <option value="'.$kriteria->id.'">'.$kriteria->nama.' - ('.$kriteria->jenis.')</option>
+                                                                    <select name='kriteria' class='form-control'>
+                                                                        <?php foreach ($listkriteria as $kriteria) {
+                                                                            echo '
+                                                                        <option value="' . $kriteria->id . '">' . $kriteria->nama . ' - (' . $kriteria->jenis . ')</option>
                                                                         ';
-                                                                    }
+                                                                        }
 
-                                                                    ?>
-                                                                </select>
+                                                                        ?>
+                                                                    </select>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -120,20 +127,6 @@
                                                                     <input name="nilai" type="number" class="form-control" placeholder="ex: 90">
                                                                 </div>
                                                             </div>
-                                                            <div class="col-md-6">
-                                                                <div class="form-group form-group-default">
-                                                                    <label>normalisasi</label>
-                                                                    <input name="normalisasi" type="number" step="0.01" class="form-control" placeholder="ex: 0.25">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                                <div class="form-group form-group-default">
-                                                                    <label>preferensi</label>
-                                                                    <input name="preferensi" type="number" step="0.01" class="form-control" placeholder="ex: 0.6">
-                                                                </div>
-                                                            </div>
-
-
                                                         </div>
                                                         <div class="modal-footer no-bd">
                                                             <input type="submit" name="submit" value="submit" class="btn btn-primary"></input>
@@ -182,15 +175,15 @@
                                                             <div class="col-md-12">
                                                                 <div class="form-group form-group-default">
                                                                     <label>Kriteria</label>
-                                                                <select  id="editKriteria" name='kriteria' class='form-control'>
-                                                                    <?php foreach ($listkriteria as $kriteria){
-                                                                        echo '
-                                                                        <option value="'.$kriteria->id.'">'.$kriteria->nama.' - ('.$kriteria->jenis.')</option>
+                                                                    <select id="editKriteria" name='kriteria' class='form-control'>
+                                                                        <?php foreach ($listkriteria as $kriteria) {
+                                                                            echo '
+                                                                        <option value="' . $kriteria->id . '">' . $kriteria->nama . ' - (' . $kriteria->jenis . ')</option>
                                                                         ';
-                                                                    }
+                                                                        }
 
-                                                                    ?>
-                                                                </select>
+                                                                        ?>
+                                                                    </select>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -210,18 +203,6 @@
                                                                 <div class="form-group form-group-default">
                                                                     <label>nilai</label>
                                                                     <input id="editnilai" name="nilai" type="number" class="form-control" placeholder="ex: 90">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                                <div class="form-group form-group-default">
-                                                                    <label>normalisasi</label>
-                                                                    <input id="editnormalisasi" name="normalisasi" type="number" step="0.01" class="form-control" placeholder="ex: 0.25">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                                <div class="form-group form-group-default">
-                                                                    <label>preferensi</label>
-                                                                    <input id="editpreferensi" name="preferensi" type="number" step="0.01" class="form-control" placeholder="ex: 0.6">
                                                                 </div>
                                                             </div>
 
@@ -269,7 +250,7 @@
                                                         <tr>
                                                             <td value="' . $data->nid . '" nis="' . $data->siswa . '">' . $data->nama . '</td>
                                                             <td value="' . $data->semester . '">' . $strSmt[--$data->semester] . '</td>
-                                                            <td value="'.$data->kriteria.'">' . $data->knama . ' ('.$data->jenis.')</td>
+                                                            <td value="' . $data->kriteria . '">' . $data->knama . ' (' . $data->jenis . ')</td>
                                                             <td>' . $data->nilai . '</td>
                                                             <td>' . $data->normalisasi . '</td>
                                                             <td>' . $data->preferensi . '</td>

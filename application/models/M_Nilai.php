@@ -72,6 +72,10 @@ class M_Nilai extends CI_Model
         $this->db->set($v);
         $this->db->update('nilai', $v);
     }
+    public function reset_Data(){
+        $this->db->empty_table('nilai');
+        $this->db->query('alter table nilai auto_increment 1');
+    }
     public function get_result(){
         $this->db->select('siswa, sum(preferensi) as total');
         $this->db->group_by('siswa');

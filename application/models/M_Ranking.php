@@ -4,10 +4,18 @@ class M_Ranking extends CI_Model
 {
     public function get_list()
     {
-        
+        $this->db->join('siswa','siswa.nis=ranking.siswa');
         return $this->db->get('ranking')->result();
     }
     public function list_acc(){
+        $this->db->select('count(*) as c');
+        $this->db->where('keputusan','diterima');
+        return $this->db->get('ranking')->row();
+    }
+    public function list_dec(){
+        $this->db->select('count(*) as c');
+        $this->db->where('keputusan','ditolak');
+        return $this->db->get('ranking')->row();
     }
     
     public function save($data)

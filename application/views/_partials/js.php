@@ -94,6 +94,37 @@
         styleWrapper: true,
         styleText: true
     })
+
+    Circles.create({
+        id: 'circles-5',
+        radius: 45,
+        value: 100,
+        maxValue: 100,
+        width: 7,
+        text: <?php echo $listacc->c; ?>,
+        colors: ['#f1f1f1', '#6610f2'],
+        duration: 400,
+        wrpClass: 'circles-wrp',
+        textClass: 'circles-text',
+        styleWrapper: true,
+        styleText: true
+    })
+
+
+    Circles.create({
+        id: 'circles-6',
+        radius: 45,
+        value: 100,
+        maxValue: 100,
+        width: 7,
+        text: <?php echo $listdec->c; ?>,
+        colors: ['#f1f1f1', '#007bff'],
+        duration: 400,
+        wrpClass: 'circles-wrp',
+        textClass: 'circles-text',
+        styleWrapper: true,
+        styleText: true
+    })
 </script>
 
 <script>
@@ -132,6 +163,28 @@
 
         });
     }
+    $('#resetSiswa').on('click',function(e){
+        swal({
+            icon: 'warning',
+            title: 'Are you sure?',
+            text: "You won't be able to get this data again!",
+            type: 'warning',
+            buttons: {
+                confirm: {
+                    text: 'Yes, Remove all data',
+                    className: 'btn btn-success'
+                },
+                cancel: {
+                    visible: true,
+                    className: 'btn btn-danger'
+                }
+            }
+        }).then((result) => {
+            if (result) {
+                document.location.href = 'Reset_Siswa';
+            }
+        });
+    });
     //nilai edit & hapus
     $('.edit-nilai').on('click', function(e) {
         data = $(this).parent().parent();
@@ -174,6 +227,28 @@
 
         });
     }
+    $('#resetNilai').on('click',function(e){
+        swal({
+            icon: 'warning',
+            title: 'Are you sure?',
+            text: "You won't be able to get this data again!",
+            type: 'warning',
+            buttons: {
+                confirm: {
+                    text: 'Yes, Remove all data',
+                    className: 'btn btn-success'
+                },
+                cancel: {
+                    visible: true,
+                    className: 'btn btn-danger'
+                }
+            }
+        }).then((result) => {
+            if (result) {
+                document.location.href = 'Reset_Nilai';
+            }
+        });
+    });
     //kriteria edit & hapus
     $('.edit-kriteria').on('click', function(e) {
         data = $(this).parent().parent();
@@ -210,47 +285,28 @@
 
         });
     }
-    //kriteria edit & hapus
-    $('.edit-parameter').on('click', function(e) {
-        data = $(this).parent().parent();
-        id = data.children().eq(0).html();
-        kriteria = data.children().eq(1).attr('value');
-        parameter = htmlDecode(data.children().eq(2).html());
-        bobot = data.children().eq(3).html();
-        keterangan = data.children().eq(4).html();
-
-        $('#editKriteria').val(kriteria);
-        $('#editParam').val(parameter);
-        $('#editBobot').val(bobot);
-        $('#editKet').val(keterangan);
-        $("#form-edit").attr('action', 'Edit_parameter/' + id);
-
-    });
-
-    function hapus_parameter(id) {
+    $('#resetKriteria').on('click',function(e){
         swal({
             icon: 'warning',
-            title: 'Peringatan: ',
-            text: 'Yakin ingin menghapus parameter?',
+            title: 'Are you sure?',
+            text: "You won't be able to get this data again!",
+            type: 'warning',
             buttons: {
                 confirm: {
-                    text: 'Hapus',
-                    className: 'btn btn-danger'
+                    text: 'Yes, Remove all data',
+                    className: 'btn btn-success'
                 },
                 cancel: {
-                    visible: 'true',
-                    className: 'btn btn-success'
+                    visible: true,
+                    className: 'btn btn-danger'
                 }
             }
         }).then((result) => {
-            if (result)
-                document.location.href = 'Hapus_parameter/' + id;
-
+            if (result) {
+                document.location.href = 'Reset_Kriteria';
+            }
         });
-    }
-
-
-
+    });
 
     $('.log-out').on('click', function(e) {
         e.preventDefault();
@@ -303,6 +359,37 @@
             }
         });
     });
+    $('#savePDF').on('click',function(e){
+        text=$('#kontenExport').html();
+        fetch('<?= base_url();?>Admin/Cetak')
+        .then(res=>res.json())
+        .then(res=>{
+            console.log(res);
+        })
+    });
+    $('#resetBtn').on('click',function(e){
+        swal({
+            icon: 'warning',
+            title: 'Are you sure?',
+            text: "You won't be able to get this data again!",
+            type: 'warning',
+            buttons: {
+                confirm: {
+                    text: 'Yes, Remove all data',
+                    className: 'btn btn-success'
+                },
+                cancel: {
+                    visible: true,
+                    className: 'btn btn-danger'
+                }
+            }
+        }).then((result) => {
+            if (result) {
+                document.location.href = 'Reset';
+            }
+        });
+    });
+    
 </script>
 
 <script>

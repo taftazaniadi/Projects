@@ -2,9 +2,9 @@
     <div class="sidebar-wrapper scrollbar scrollbar-inner">
         <div class="sidebar-content">
             <div class="user">
-                <div class="avatar-sm float-left mr-2">
+                <!-- <div class="avatar-sm float-left mr-2">
                     <img src="<?= base_url() ?>assets/img/profile.jpg" alt="..." class="avatar-img rounded-circle">
-                </div>
+                </div> -->
                 <div class="info">
                     <a>
                         <span>
@@ -41,11 +41,6 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="<?= base_url('Admin/Parameter') ?>">
-                                    <span class="sub-item">Parameter</span>
-                                </a>
-                            </li>
-                            <li>
                                 <a href="<?= base_url('Admin/Siswa') ?>">
                                     <span class="sub-item">Siswa</span>
                                 </a>
@@ -70,6 +65,11 @@
                             <li>
                                 <a href="<?= base_url('Admin/Proses') ?>">
                                     <span class="sub-item">Nilai</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="<?= base_url('Admin/Ranking') ?>">
+                                    <span class="sub-item">Hasil</span>
                                 </a>
                             </li>
                         </ul>

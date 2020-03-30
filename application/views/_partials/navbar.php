@@ -19,7 +19,7 @@
                     <i class="fa fa-search"></i>
                 </a>
             </li>
-            <li class="nav-item dropdown hidden-caret">
+            <!-- <li class="nav-item dropdown hidden-caret">
                 <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#" aria-expanded="false">
                     <div class="avatar-sm">
                         <img src="<?= base_url() ?>assets/img/profile.jpg" alt="..." class="avatar-img rounded-circle">
@@ -44,7 +44,7 @@
                         </li>
                     </div>
                 </ul>
-            </li>
+            </li> -->
         </ul>
     </div>
 </nav>

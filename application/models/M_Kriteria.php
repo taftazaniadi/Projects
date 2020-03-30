@@ -24,4 +24,10 @@ class M_Kriteria extends CI_Model
         $this->db->where('id',$id);
         $this->db->update('kriteria',$data);
     }
+    public function reset()
+    {
+        // $this->db->where('id','true');
+        $this->db->empty_table('kriteria');
+        $this->db->query('alter table kriteria auto_increment 1');
+    }
 }

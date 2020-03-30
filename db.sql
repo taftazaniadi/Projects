@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Mar 26, 2020 at 01:51 PM
+-- Generation Time: Mar 30, 2020 at 07:14 PM
 -- Server version: 5.7.24
 -- PHP Version: 7.2.19
 
@@ -82,8 +82,9 @@ CREATE TABLE `kriteria` (
 --
 
 INSERT INTO `kriteria` (`id`, `nama`, `jenis`, `bobot`) VALUES
-(4, 'akademik', 'benefit', 90),
-(5, 'prestasi', 'benefit', 54);
+(4, 'akademik', 'benefit', 50),
+(5, 'prestasi', 'benefit', 35),
+(6, 'Sikap', 'benefit', 15);
 
 -- --------------------------------------------------------
 
@@ -97,8 +98,8 @@ CREATE TABLE `nilai` (
   `semester` int(11) NOT NULL,
   `kriteria` int(11) NOT NULL,
   `nilai` int(11) NOT NULL,
-  `normalisasi` float NOT NULL,
-  `preferensi` float NOT NULL
+  `normalisasi` float DEFAULT NULL,
+  `preferensi` float DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -106,28 +107,9 @@ CREATE TABLE `nilai` (
 --
 
 INSERT INTO `nilai` (`id`, `siswa`, `semester`, `kriteria`, `nilai`, `normalisasi`, `preferensi`) VALUES
-(33, 6100040, 1, 5, 90, 0.25, 0.6);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `parameter`
---
-
-CREATE TABLE `parameter` (
-  `id` int(11) NOT NULL,
-  `kriteria` int(11) NOT NULL,
-  `parameter_nilai` varchar(50) NOT NULL,
-  `bobot_parameter` int(11) NOT NULL,
-  `keterangan` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `parameter`
---
-
-INSERT INTO `parameter` (`id`, `kriteria`, `parameter_nilai`, `bobot_parameter`, `keterangan`) VALUES
-(3, 4, '>80 dan <98', 1, 'rata-rata');
+(33, 6100040, 1, 5, 90, 1, 0.35),
+(34, 3434334, 1, 4, 97, 1, 0.5),
+(35, 6100040, 1, 4, 30, 0.31, 0.155);
 
 -- --------------------------------------------------------
 
@@ -142,6 +124,14 @@ CREATE TABLE `ranking` (
   `peringkat` int(11) NOT NULL,
   `keputusan` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `ranking`
+--
+
+INSERT INTO `ranking` (`id`, `siswa`, `total`, `peringkat`, `keputusan`) VALUES
+(1, 3434334, 0.5, 1, 'diterima'),
+(2, 6100040, 0.505, 2, 'diterima');
 
 -- --------------------------------------------------------
 
@@ -243,12 +233,6 @@ ALTER TABLE `nilai`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `parameter`
---
-ALTER TABLE `parameter`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indexes for table `ranking`
 --
 ALTER TABLE `ranking`
@@ -286,25 +270,19 @@ ALTER TABLE `kelas`
 -- AUTO_INCREMENT for table `kriteria`
 --
 ALTER TABLE `kriteria`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `nilai`
 --
 ALTER TABLE `nilai`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
-
---
--- AUTO_INCREMENT for table `parameter`
---
-ALTER TABLE `parameter`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT for table `ranking`
 --
 ALTER TABLE `ranking`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
