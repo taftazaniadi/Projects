@@ -138,9 +138,9 @@ class Admin extends CI_Controller
 		redirect("Admin/Parameter");
 	}
 	//proses
-	public function Proses()
+	public function Proses($err=0)
 	{
-		// $this->data['err']=$err;
+		$this->data['err']=$err;
 		$this->load->view('interface/proses', $this->data);
 	}
 	public function Hasil()
@@ -151,9 +151,8 @@ class Admin extends CI_Controller
 		if ($this->input->post('submit')) {
 			$this->data['err'] = $this->input->post('jumlah');
 
-			if($this->data['err']>$this->data['total']->c)
-				redirect('Admin/Proses');
-			// $this->load->view('interface/proses', $this->data);
+			if($this->data['err']>$this->data['total']->c || $this->data['err']<0)
+				redirect('Admin/Proses/'.$this->data['err']);
 
 			foreach ($this->data['siswa'] as $siswa) {
 				foreach ($this->data['listkriteria'] as $kriteria) {

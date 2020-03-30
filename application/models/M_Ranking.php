@@ -7,6 +7,8 @@ class M_Ranking extends CI_Model
         
         return $this->db->get('ranking')->result();
     }
+    public function list_acc(){
+    }
     
     public function save($data)
     {

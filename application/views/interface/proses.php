@@ -40,12 +40,12 @@
                                     <div class="card-category">Masukkan Jumlah siswa yang diterima</div>
                                     <div class="modal-body">
                                         <p class="small"></p>
-                                        <form action="Hasil" id="form-edit" method="POST">
+                                        <form action="<?=base_url()?>Admin/Hasil" id="form-edit" method="POST">
                                             <div class="row">
                                                 <div class="col-sm-6">
                                                     <div class="form-group form-group-default">
                                                         <label>Kuota</label>
-                                                        <input id="jumlah" name="jumlah" type="number" class="form-control" placeholder="ex: 30">
+                                                        <input id="jumlah" name="jumlah" type="number" class="form-control"  min='1' placeholder="ex: 30">
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-6">
@@ -75,7 +75,7 @@
         ?>
             swal({
                 icon: 'warning',
-                title: 'Melebihi data siswa',
+                title: 'Jumlah yang anda masukkan tidak valid',
                 text: 'Total siswa: '+ <?= $total->c ?>,
                 buttons: {
                     confirm: {
