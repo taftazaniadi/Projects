@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+<?php $k = $kriteria; ?>
 
 <head>
     <?php $this->load->view("_partials/head.php") ?>
@@ -64,9 +65,9 @@
                                             <select name="" id="hapusItem" class="form-control col-6" style="margin-left:30%;">
                                                 <option value="-5">--pilih siswa untuk dihapus--</option>
                                                 <?php
-                                                    foreach ($dsiswa as $data) {
-                                                        echo "<option value='$data->nis'>$data->nama</option>";
-                                                    }
+                                                foreach ($dsiswa as $data) {
+                                                    echo "<option value='$data->nis'>$data->nama</option>";
+                                                }
                                                 ?>
                                             </select>
                                             <button onclick="hapus_nilai()" class="btn btn-danger btn-round ml-auto">
@@ -192,7 +193,7 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        
+
                                                         <div class="row">
                                                             <div class="col-md-6">
                                                                 <div class="form-group form-group-default">
@@ -281,6 +282,28 @@
     </div>
 
     <?php $this->load->view("_partials/js.php") ?>
+    <script>
+        <?php
+        if ($k->c < 3 || $k->c > 10) {
+        ?>
+            swal({
+                icon: 'warning',
+                title: 'Total kriteria tidak valid',
+                text: 'Kriteria minimal 3 dan maksimal 10',
+                buttons: {
+                    confirm: {
+                        text: 'Mengerti',
+                        className: 'btn btn-success'
+                    }
+                }
+            }).then((result) => {
+                if (result)
+                    document.location.href = 'Kriteria/';
+
+            });
+        <?php
+        } ?>
+    </script>
 </body>
 
 </html>

@@ -47,10 +47,13 @@
                                     <div class="d-flex align-items-center">
                                         <h4 class="card-title">Tabel Data kriteria</h4>
                                         <div class="" style="position: absolute;right:0;margin-right:15px;margin-top:-0px;">
-                                            <button class="btn btn-primary btn-round ml-auto" data-toggle="modal" data-target="#addRowModal">
-                                                <i class="fa fa-plus"></i>
-                                                Tambah kriteria
-                                            </button>
+                                            <?php if ($kriteria->c < 10) { ?>
+                                                <button class="btn btn-primary btn-round ml-auto" data-toggle="modal" data-target="#addRowModal">
+                                                    <i class="fa fa-plus"></i>
+                                                    Tambah kriteria
+                                                </button>
+                                            <?php } ?>
+
                                             <button id="resetKriteria" class="btn btn-danger btn-round ml-auto">
                                                 <i class="fa fa-trash"></i>
                                                 Hapus semua
@@ -78,7 +81,7 @@
                                                 </div>
                                                 <div class="modal-body">
                                                     <p class="small">Tambah kriteria baru</p>
-                                                    <form action="Tambah_kriteria" method="POST">
+                                                    <form action="<?= base_url(); ?>Admin/Tambah_kriteria" method="POST">
                                                         <div class="row">
                                                             <div class="col-md-12">
                                                                 <div class="form-group form-group-default">
@@ -192,7 +195,7 @@
                                                 if (!empty($listkriteria)) {
                                                     foreach ($listkriteria as $data) {
 
-                                                        echo '
+                                                        $str =  '
                                                         <tr>
                                                             <td>' . $data->id . '</td>
                                                             <td>' . $data->nama . '</td>
@@ -200,9 +203,13 @@
                                                             <td>' . $data->bobot . '</td>
                                                             <td class="action">
                                                             <button class="edit-kriteria btn btn-success btn-sm" data-toggle="modal" data-target="#editRowModal"><i class="fa fa-pen"></i> Edit</button>
-                                                            <button onclick="hapus_kriteria(' . $data->id . ')" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> Hapus</button></td>
+                                                            ';
+                                                        if ($kriteria->c > 3) {
+                                                            $str .= '<button onclick="hapus_kriteria(' . $data->id . ')" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> Hapus</button></td>
                                                         </tr>
                                                         ';
+                                                        }
+                                                        echo $str;
                                                     }
                                                 } else {
                                                     echo '<tr><td  colspan=5 style="text-align:center">data kosong</td></tr>';

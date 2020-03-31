@@ -86,7 +86,7 @@
         value: 100,
         maxValue: 100,
         width: 7,
-        text: <?php echo $count->c; ?>,
+        text: <?php echo $csiswa->c; ?>,
         colors: ['#f1f1f1', '#F28391'],
         duration: 400,
         wrpClass: 'circles-wrp',
@@ -103,22 +103,6 @@
         width: 7,
         text: <?php echo $listacc->c; ?>,
         colors: ['#f1f1f1', '#6610f2'],
-        duration: 400,
-        wrpClass: 'circles-wrp',
-        textClass: 'circles-text',
-        styleWrapper: true,
-        styleText: true
-    })
-
-
-    Circles.create({
-        id: 'circles-6',
-        radius: 45,
-        value: 100,
-        maxValue: 100,
-        width: 7,
-        text: <?php echo $listdec->c; ?>,
-        colors: ['#f1f1f1', '#007bff'],
         duration: 400,
         wrpClass: 'circles-wrp',
         textClass: 'circles-text',

@@ -40,12 +40,12 @@
                                     <div class="card-category">Masukkan Jumlah siswa yang diterima</div>
                                     <div class="modal-body">
                                         <p class="small"></p>
-                                        <form action="<?=base_url()?>Admin/Hasil" id="form-edit" method="POST">
+                                        <form action="<?= base_url() ?>Admin/Hasil" id="form-edit" method="POST">
                                             <div class="row">
                                                 <div class="col-sm-6">
                                                     <div class="form-group form-group-default">
                                                         <label>Kuota</label>
-                                                        <input id="jumlah" name="jumlah" type="number" class="form-control"  min='1' placeholder="ex: 30">
+                                                        <input id="jumlah" name="jumlah" type="number" class="form-control" min='1' placeholder="ex: 30">
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-6">
@@ -70,13 +70,33 @@
 
     <?php $this->load->view("_partials/js.php") ?>
     <script>
-        <?php if ($over != 0) {
+        <?php
+        if ($kriteria->c < 3 || $kriteria->c > 10) {
+        ?>
+            swal({
+                icon: 'warning',
+                title: 'Total kriteria tidak valid',
+                text: 'Kriteria minimal 3 dan maksimal 10',
+                buttons: {
+                    confirm: {
+                        text: 'Mengerti',
+                        className: 'btn btn-success'
+                    }
+                }
+            }).then((result) => {
+                if (result)
+                    document.location.href = 'Kriteria/';
+
+            });
+        <?php
+        }
+        if ($over != 0) {
             $over = 0;
         ?>
             swal({
                 icon: 'warning',
                 title: 'Jumlah yang anda masukkan tidak valid',
-                text: 'Total siswa yang valid: '+ <?= $csiswa->c ?>,
+                text: 'Total siswa yang valid: ' + <?= $csiswa->c ?>,
                 buttons: {
                     confirm: {
                         text: 'Mengerti',

@@ -12,6 +12,7 @@ class M_Kriteria extends CI_Model
     public function save(){
         $data = $this->input->post();
         array_pop($data);
+        // return $data;
         $this->db->insert('kriteria',$data);
     }
     public function delete($id){
