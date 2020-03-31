@@ -55,6 +55,33 @@
                     </div>
                 </li>
                 <li class="nav-item">
+                    <a data-toggle="collapse" href="#base2">
+                        <i class="fas fa-school"></i>
+                        <p>Detail</p>
+                        <span class="caret"></span>
+                    </a>
+                    <div class="collapse" id="base2">
+                        <ul class="nav nav-collapse">
+                            <li>
+                                <a href="<?= base_url('Admin/Guru') ?>">
+                                    <span class="sub-item">Guru</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="<?= base_url('Admin/Kelas') ?>">
+                                    <span class="sub-item">Kelas</span>
+                                </a>
+                            </li>
+                           
+                            <li>
+                                <a href="<?= base_url('Admin/Jurusan') ?>">
+                                    <span class="sub-item">Jurusan</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-item">
                     <a data-toggle="collapse" href="#forms">
                         <i class="fas fa-pen-square"></i>
                         <p>Proses</p>

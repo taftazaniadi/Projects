@@ -284,6 +284,26 @@
     <?php $this->load->view("_partials/js.php") ?>
     <script>
         <?php
+        if ($total->c<1) {
+        ?>
+            swal({
+                icon: 'warning',
+                title: 'Belum ada siswa',
+                text: 'Daftarkan siswa terlebih dahulu',
+                buttons: {
+                    confirm: {
+                        text: 'Mengerti',
+                        className: 'btn btn-success'
+                    }
+                }
+            }).then(res => {
+                document.location.href = 'Siswa';
+            })
+        <?php
+        } ?>
+    </script>
+    <script>
+        <?php
         if ($k->c < 3 || $k->c > 10) {
         ?>
             swal({

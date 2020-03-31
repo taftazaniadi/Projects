@@ -30,7 +30,7 @@
                     <div class="page-inner py-5">
                         <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
                             <div>
-                                <h2 class="text-white pb-2 fw-bold">Data Siswa</h2>
+                                <h2 class="text-white pb-2 fw-bold">Data Kelas</h2>
                                 <h5 class="text-white op-7 mb-2">Sistem Penunjang Keputusan - Metode SAW</h5>
                             </div>
                         </div>
@@ -45,14 +45,14 @@
                             <div class="card">
                                 <div class="card-header">
                                     <div class="d-flex align-items-center">
-                                        <h4 class="card-title">Tabel Data Siswa</h4>
+                                        <h4 class="card-title">Tabel Data Kelas</h4>
                                         <div class="" style="position: absolute;right:0;margin-right:15px;margin-top:-0px;">
 
-                                        <button class="btn btn-primary btn-round ml-auto" data-toggle="modal" data-target="#addRowModal">
-                                            <i class="fa fa-plus"></i>
-                                            Tambah Siswa
-                                        </button>
-                                        <button id="resetSiswa" class="btn btn-danger btn-round ml-auto">
+                                            <button class="btn btn-primary btn-round ml-auto" data-toggle="modal" data-target="#addRowModal">
+                                                <i class="fa fa-plus"></i>
+                                                Tambah Kelas
+                                            </button>
+                                            <button id="resetKelas" class="btn btn-danger btn-round ml-auto">
                                                 <i class="fa fa-trash"></i>
                                                 Hapus semua
                                             </button>
@@ -69,7 +69,7 @@
                                                         <span class="fw-mediumbold">
                                                             Data</span>
                                                         <span class="fw-light">
-                                                            Siswa
+                                                            Kelas
                                                         </span>
                                                     </h5>
                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -77,33 +77,44 @@
                                                     </button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <p class="small">Tambah siswa baru</p>
-                                                    <form action="<?=base_url();?>Admin/Tambah_siswa" method="POST">
+                                                    <p class="small">Tambah Kelas baru</p>
+                                                    <form action="<?= base_url(); ?>Admin/Tambah_Kelas" method="POST">
                                                         <div class="row">
                                                             <div class="col-sm-12">
                                                                 <div class="form-group form-group-default">
-                                                                    <label>NIS</label>
-                                                                    <input name="nis" type="number" class="form-control" placeholder="ex: 6100000">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-6 pr-0">
-                                                                <div class="form-group form-group-default">
-                                                                    <label>Nama</label>
-                                                                    <input name="nama" type="text" class="form-control" placeholder="ex: Faizal">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                                <div class="form-group form-group-default">
                                                                     <label>Kelas</label>
-                                                                    <select class="form-control" name="kelas">
+                                                                    <select name="alias" id="" class="form-control">
+                                                                        <option value="X">X</option>
+                                                                        <option value="XI">XI</option>
+                                                                        <option value="XII">XII</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-12">
+                                                                <div class="form-group form-group-default">
+                                                                    <label>Jurusan</label>
+                                                                    <select name="jurusan" id="" class="form-control">
                                                                         <?php
-
-                                                                        foreach ($kelas as $k) {
-                                                                            echo '
-                                                                            <option value="' . $k->kid . '">' . $k->alias . ' - ' . $k->jurusan . '</option>
-                                                                            ';
+                                                                        foreach ($jurusan as $j) {
+                                                                            echo "
+                                                                            <option value='$j->id'>$j->jurusan</option>
+                                                                            ";
                                                                         }
+                                                                        ?>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-12">
+                                                                <div class="form-group form-group-default">
+                                                                    <label>Wali Kelas</label>
+                                                                    <select name="wali" id="" class="form-control">
+                                                                        <?php
+                                                                        foreach ($guru as $g) {
 
+                                                                            echo "
+                                                                            <option value='$g->nik'>$g->nama</option>
+                                                                            ";
+                                                                        }
                                                                         ?>
                                                                     </select>
                                                                 </div>
@@ -130,7 +141,7 @@
                                                         <span class="fw-mediumbold">
                                                             Data</span>
                                                         <span class="fw-light">
-                                                            Siswa
+                                                            Kelas
                                                         </span>
                                                     </h5>
                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -138,33 +149,21 @@
                                                     </button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <p class="small">edit siswa</p>
+                                                    <p class="small">edit Kelas</p>
                                                     <form action="#" id="form-edit" method="POST">
                                                         <div class="row">
+                                                            
                                                             <div class="col-sm-12">
                                                                 <div class="form-group form-group-default">
-                                                                    <label>NIS</label>
-                                                                    <input id="editNis" name="nis" type="number" class="form-control" placeholder="ex: 6100000">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-6 pr-0">
-                                                                <div class="form-group form-group-default">
-                                                                    <label>Nama</label>
-                                                                    <input id="editNama" name="nama" type="text" class="form-control" placeholder="ex: Faizal">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                                <div class="form-group form-group-default">
-                                                                    <label>Kelas</label>
-                                                                    <select class="form-control" name="kelas" id="editKelas">
+                                                                    <label>Wali Kelas</label>
+                                                                    <select name="wali" id="editWali" class="form-control">
                                                                         <?php
+                                                                        foreach ($guru as $g) {
 
-                                                                        foreach ($kelas as $k) {
-                                                                            echo '
-                                                                            <option value="' . $k->kid . '">' . $k->alias . ' - ' . $k->jurusan . '</option>
-                                                                            ';
+                                                                            echo "
+                                                                            <option value='$g->nik'>$g->nama</option>
+                                                                            ";
                                                                         }
-
                                                                         ?>
                                                                     </select>
                                                                 </div>
@@ -187,27 +186,27 @@
                                         <table id="add-row" class="display table table-striped table-hover">
                                             <thead>
                                                 <tr>
-                                                    <th>NIS</th>
-                                                    <th>Nama</th>
+                                                    <th>ID</th>
                                                     <th>Kelas</th>
                                                     <th>Jurusan</th>
+                                                    <th>Wali</th>
                                                     <th style="width: 25%">Kelola</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <?php
-                                                if (!empty($siswa)) {
+                                                if (!empty($kelas)) {
                                                     $no = 0;
-                                                    foreach ($siswa as $data) {
+                                                    foreach ($kelas as $data) {
                                                         echo '
                                                         <tr>
-                                                            <td>' . $data->nis . '</td>
-                                                            <td>' . $data->nama . '</td>
-                                                            <td value="' . $data->kelas . '">' . $data->alias . '</td>
+                                                            <td>' . $data->kid . '</td>
+                                                            <td>' . $data->alias . '</td>
                                                             <td>' . $data->jurusan . '</td>
+                                                            <td value="'.$data->gid.'">' . $data->nama . '</td>
                                                             <td class="action">
-                                                            <button class="edit-bt btn btn-success btn-sm" data-toggle="modal" data-target="#editRowModal"><i class="fa fa-pen"></i> Edit</button>
-                                                            <button onclick="hapus_siswa(' . $data->nis . ')" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> Hapus</button></td>
+                                                            <button class="edit-Kelas btn btn-success btn-sm" data-toggle="modal" data-target="#editRowModal"><i class="fa fa-pen"></i> Edit</button>
+                                                            <button onclick="hapus_kelas(' . $data->kid . ')" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> Hapus</button></td>
                                                         </tr>
                                                         ';
                                                     }
@@ -233,12 +232,12 @@
     <?php $this->load->view("_partials/js.php") ?>
     <script>
         <?php
-        if ($ckelas->c<1) {
+        if ($cjurusan->c<1) {
         ?>
             swal({
                 icon: 'warning',
-                title: 'Kelas Kosong',
-                text: 'Daftarkan kelas terlebih dahulu',
+                title: 'Jurusan Kosong',
+                text: 'Daftarkan jurusan terlebih dahulu',
                 buttons: {
                     confirm: {
                         text: 'Mengerti',
@@ -246,25 +245,27 @@
                     }
                 }
             }).then(res => {
-                document.location.href = 'Kelas';
+                document.location.href = 'Jurusan';
             })
         <?php
         } ?>
     </script>
     <script>
         <?php
-        if ($err>0) {
+        if ($err > 0) {
         ?>
             swal({
                 icon: 'warning',
-                title: 'NIS sudah terdaftar sebagai siswa',
-                text: 'Pastikan NIS yang anda masukkan tidak salah',
+                title: 'NIK sudah terdaftar sebagai Kelas',
+                text: 'Pastikan NIK yang anda masukkan tidak salah',
                 buttons: {
                     confirm: {
                         text: 'Mengerti',
                         className: 'btn btn-success'
                     }
                 }
+            }).then(res => {
+                document.location.href = '0/';
             })
         <?php
         } ?>

@@ -30,7 +30,7 @@
                     <div class="page-inner py-5">
                         <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
                             <div>
-                                <h2 class="text-white pb-2 fw-bold">Data Siswa</h2>
+                                <h2 class="text-white pb-2 fw-bold">Data guru</h2>
                                 <h5 class="text-white op-7 mb-2">Sistem Penunjang Keputusan - Metode SAW</h5>
                             </div>
                         </div>
@@ -45,14 +45,14 @@
                             <div class="card">
                                 <div class="card-header">
                                     <div class="d-flex align-items-center">
-                                        <h4 class="card-title">Tabel Data Siswa</h4>
+                                        <h4 class="card-title">Tabel Data guru</h4>
                                         <div class="" style="position: absolute;right:0;margin-right:15px;margin-top:-0px;">
 
                                         <button class="btn btn-primary btn-round ml-auto" data-toggle="modal" data-target="#addRowModal">
                                             <i class="fa fa-plus"></i>
-                                            Tambah Siswa
+                                            Tambah guru
                                         </button>
-                                        <button id="resetSiswa" class="btn btn-danger btn-round ml-auto">
+                                        <button id="resetGuru" class="btn btn-danger btn-round ml-auto">
                                                 <i class="fa fa-trash"></i>
                                                 Hapus semua
                                             </button>
@@ -69,7 +69,7 @@
                                                         <span class="fw-mediumbold">
                                                             Data</span>
                                                         <span class="fw-light">
-                                                            Siswa
+                                                            guru
                                                         </span>
                                                     </h5>
                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -77,35 +77,19 @@
                                                     </button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <p class="small">Tambah siswa baru</p>
-                                                    <form action="<?=base_url();?>Admin/Tambah_siswa" method="POST">
+                                                    <p class="small">Tambah guru baru</p>
+                                                    <form action="Tambah_guru" method="POST">
                                                         <div class="row">
                                                             <div class="col-sm-12">
                                                                 <div class="form-group form-group-default">
-                                                                    <label>NIS</label>
-                                                                    <input name="nis" type="number" class="form-control" placeholder="ex: 6100000">
+                                                                    <label>NIK</label>
+                                                                    <input name="nik" type="number" class="form-control" placeholder="ex: 6100000">
                                                                 </div>
                                                             </div>
-                                                            <div class="col-md-6 pr-0">
+                                                            <div class="col-sm-12">
                                                                 <div class="form-group form-group-default">
                                                                     <label>Nama</label>
-                                                                    <input name="nama" type="text" class="form-control" placeholder="ex: Faizal">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                                <div class="form-group form-group-default">
-                                                                    <label>Kelas</label>
-                                                                    <select class="form-control" name="kelas">
-                                                                        <?php
-
-                                                                        foreach ($kelas as $k) {
-                                                                            echo '
-                                                                            <option value="' . $k->kid . '">' . $k->alias . ' - ' . $k->jurusan . '</option>
-                                                                            ';
-                                                                        }
-
-                                                                        ?>
-                                                                    </select>
+                                                                    <input name="nama" type="text" class="form-control" placeholder="ex: Dwi Agustina, S.Pd.">
                                                                 </div>
                                                             </div>
 
@@ -130,7 +114,7 @@
                                                         <span class="fw-mediumbold">
                                                             Data</span>
                                                         <span class="fw-light">
-                                                            Siswa
+                                                            guru
                                                         </span>
                                                     </h5>
                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -138,13 +122,13 @@
                                                     </button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <p class="small">edit siswa</p>
+                                                    <p class="small">edit guru</p>
                                                     <form action="#" id="form-edit" method="POST">
                                                         <div class="row">
                                                             <div class="col-sm-12">
                                                                 <div class="form-group form-group-default">
                                                                     <label>NIS</label>
-                                                                    <input id="editNis" name="nis" type="number" class="form-control" placeholder="ex: 6100000">
+                                                                    <input id="editNik" name="nik" type="number" class="form-control" placeholder="ex: 6100000">
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-6 pr-0">
@@ -153,22 +137,7 @@
                                                                     <input id="editNama" name="nama" type="text" class="form-control" placeholder="ex: Faizal">
                                                                 </div>
                                                             </div>
-                                                            <div class="col-md-6">
-                                                                <div class="form-group form-group-default">
-                                                                    <label>Kelas</label>
-                                                                    <select class="form-control" name="kelas" id="editKelas">
-                                                                        <?php
-
-                                                                        foreach ($kelas as $k) {
-                                                                            echo '
-                                                                            <option value="' . $k->kid . '">' . $k->alias . ' - ' . $k->jurusan . '</option>
-                                                                            ';
-                                                                        }
-
-                                                                        ?>
-                                                                    </select>
-                                                                </div>
-                                                            </div>
+                                                            
 
                                                         </div>
                                                         <div class="modal-footer no-bd">
@@ -187,27 +156,23 @@
                                         <table id="add-row" class="display table table-striped table-hover">
                                             <thead>
                                                 <tr>
-                                                    <th>NIS</th>
+                                                    <th>NIK</th>
                                                     <th>Nama</th>
-                                                    <th>Kelas</th>
-                                                    <th>Jurusan</th>
                                                     <th style="width: 25%">Kelola</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <?php
-                                                if (!empty($siswa)) {
+                                                if (!empty($guru)) {
                                                     $no = 0;
-                                                    foreach ($siswa as $data) {
+                                                    foreach ($guru as $data) {
                                                         echo '
                                                         <tr>
-                                                            <td>' . $data->nis . '</td>
+                                                            <td>' . $data->nik . '</td>
                                                             <td>' . $data->nama . '</td>
-                                                            <td value="' . $data->kelas . '">' . $data->alias . '</td>
-                                                            <td>' . $data->jurusan . '</td>
                                                             <td class="action">
-                                                            <button class="edit-bt btn btn-success btn-sm" data-toggle="modal" data-target="#editRowModal"><i class="fa fa-pen"></i> Edit</button>
-                                                            <button onclick="hapus_siswa(' . $data->nis . ')" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> Hapus</button></td>
+                                                            <button class="edit-guru btn btn-success btn-sm" data-toggle="modal" data-target="#editRowModal"><i class="fa fa-pen"></i> Edit</button>
+                                                            <button onclick="hapus_guru(' . $data->nik . ')" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> Hapus</button></td>
                                                         </tr>
                                                         ';
                                                     }
@@ -233,32 +198,12 @@
     <?php $this->load->view("_partials/js.php") ?>
     <script>
         <?php
-        if ($ckelas->c<1) {
-        ?>
-            swal({
-                icon: 'warning',
-                title: 'Kelas Kosong',
-                text: 'Daftarkan kelas terlebih dahulu',
-                buttons: {
-                    confirm: {
-                        text: 'Mengerti',
-                        className: 'btn btn-success'
-                    }
-                }
-            }).then(res => {
-                document.location.href = 'Kelas';
-            })
-        <?php
-        } ?>
-    </script>
-    <script>
-        <?php
         if ($err>0) {
         ?>
             swal({
                 icon: 'warning',
-                title: 'NIS sudah terdaftar sebagai siswa',
-                text: 'Pastikan NIS yang anda masukkan tidak salah',
+                title: 'NIK sudah terdaftar sebagai guru',
+                text: 'Pastikan NIK yang anda masukkan tidak salah',
                 buttons: {
                     confirm: {
                         text: 'Mengerti',

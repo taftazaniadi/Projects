@@ -5,6 +5,7 @@ class M_Ranking extends CI_Model
     public function get_list()
     {
         $this->db->join('siswa','siswa.nis=ranking.siswa');
+        $this->db->order_by('peringkat');
         return $this->db->get('ranking')->result();
     }
     public function list_acc(){

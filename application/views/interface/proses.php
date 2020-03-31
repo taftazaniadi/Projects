@@ -71,6 +71,26 @@
     <?php $this->load->view("_partials/js.php") ?>
     <script>
         <?php
+        if ($count->c<$kriteria->c) {
+        ?>
+            swal({
+                icon: 'warning',
+                title: 'Belum ada nilai',
+                text: 'Isi terlebih dahulu nilai untuk memulai perhitungan',
+                buttons: {
+                    confirm: {
+                        text: 'Mengerti',
+                        className: 'btn btn-success'
+                    }
+                }
+            }).then(res => {
+                document.location.href = 'Nilai';
+            })
+        <?php
+        } ?>
+    </script>
+    <script>
+        <?php
         if ($kriteria->c < 3 || $kriteria->c > 10) {
         ?>
             swal({
@@ -95,7 +115,7 @@
         ?>
             swal({
                 icon: 'warning',
-                title: 'Jumlah yang anda masukkan tidak valid',
+                title: 'Melebihi batas',
                 text: 'Total siswa yang valid: ' + <?= $csiswa->c ?>,
                 buttons: {
                     confirm: {

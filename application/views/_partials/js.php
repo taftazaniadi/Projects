@@ -125,6 +125,34 @@
         $("#form-edit").attr('action', 'Edit_siswa/' + nis);
 
     });
+    $('.edit-guru').on('click', function(e) {
+        data = $(this).parent().parent();
+        nik = data.children().eq(0).html();
+        nama = data.children().eq(1).html();
+
+        $('#editNik').val(nik);
+        $('#editNama').val(nama);
+        $("#form-edit").attr('action', 'Edit_guru/' + nik);
+
+    });
+    $('.edit-Kelas').on('click', function(e) {
+        data = $(this).parent().parent();
+        id = data.children().eq(0).html();
+        wali = data.children().eq(3).attr('value');
+
+        $('#editWali').val(wali);
+        $("#form-edit").attr('action', '<?=base_url();?>Admin/Edit_kelas/' + id);
+
+    });
+    $('.edit-jurusan').on('click', function(e) {
+        data = $(this).parent().parent();
+        id = data.children().eq(0).html();
+        nama = data.children().eq(1).html();
+
+        $('#editNama').val(nama);
+        $("#form-edit").attr('action', '<?=base_url();?>Admin/Edit_jurusan/' + id);
+
+    });
 
     function hapus_siswa(nis) {
         swal({
@@ -147,6 +175,69 @@
 
         });
     }
+    function hapus_guru(nik) {
+        swal({
+            icon: 'warning',
+            title: 'Yakin ingin menghapus guru: ',
+            text: 'data yang telah dihapus tidak dapat dikembalikan',
+            buttons: {
+                confirm: {
+                    text: 'Hapus',
+                    className: 'btn btn-danger'
+                },
+                cancel: {
+                    visible: 'true',
+                    className: 'btn btn-success'
+                }
+            }
+        }).then((result) => {
+            if (result)
+                document.location.href = 'Hapus_guru/' + nik;
+
+        });
+    }
+    function hapus_jurusan(id) {
+        swal({
+            icon: 'error',
+            title: 'Peringatan keras',
+            text: 'data kelas dan siswa akan ikut terhapus!',
+            buttons: {
+                confirm: {
+                    text: 'Hapus',
+                    className: 'btn btn-danger'
+                },
+                cancel: {
+                    visible: 'true',
+                    className: 'btn btn-success'
+                }
+            }
+        }).then((result) => {
+            if (result)
+                document.location.href = 'Hapus_jurusan/' + id;
+
+        });
+    }
+    function hapus_kelas(id) {
+        swal({
+            icon: 'warning',
+            title: 'Yakin ingin menghapus kelas: ',
+            text: 'data yang telah dihapus tidak dapat dikembalikan',
+            buttons: {
+                confirm: {
+                    text: 'Hapus',
+                    className: 'btn btn-danger'
+                },
+                cancel: {
+                    visible: 'true',
+                    className: 'btn btn-success'
+                }
+            }
+        }).then((result) => {
+            if (result)
+                document.location.href = 'Hapus_kelas/' + id;
+
+        });
+    }
     $('#resetSiswa').on('click',function(e){
         swal({
             icon: 'warning',
@@ -165,7 +256,73 @@
             }
         }).then((result) => {
             if (result) {
-                document.location.href = 'Reset_Siswa';
+                document.location.href = '<?=base_url();?>Admin/Reset_Siswa';
+            }
+        });
+    });
+    $('#resetGuru').on('click',function(e){
+        swal({
+            icon: 'warning',
+            title: 'Are you sure?',
+            text: "You won't be able to get this data again!",
+            type: 'warning',
+            buttons: {
+                confirm: {
+                    text: 'Yes, Remove all data',
+                    className: 'btn btn-success'
+                },
+                cancel: {
+                    visible: true,
+                    className: 'btn btn-danger'
+                }
+            }
+        }).then((result) => {
+            if (result) {
+                document.location.href = 'Reset_guru';
+            }
+        });
+    });
+    $('#resetJurusan').on('click',function(e){
+        swal({
+            icon: 'error',
+            title: 'Peringatan',
+            text: "data siswa dan kelas akan ikut terhapus",
+            type: 'warning',
+            buttons: {
+                confirm: {
+                    text: 'Yes, Remove all data',
+                    className: 'btn btn-success'
+                },
+                cancel: {
+                    visible: true,
+                    className: 'btn btn-danger'
+                }
+            }
+        }).then((result) => {
+            if (result) {
+                document.location.href = 'Reset_jurusan';
+            }
+        });
+    });
+    $('#resetKelas').on('click',function(e){
+        swal({
+            icon: 'warning',
+            title: 'Are you sure?',
+            text: "Data siswa dalam kelas akan ikut terhapus",
+            type: 'warning',
+            buttons: {
+                confirm: {
+                    text: 'Yes, Remove all data',
+                    className: 'btn btn-success'
+                },
+                cancel: {
+                    visible: true,
+                    className: 'btn btn-danger'
+                }
+            }
+        }).then((result) => {
+            if (result) {
+                document.location.href = '<?=base_url();?>Admin/Reset_kelas/';
             }
         });
     });

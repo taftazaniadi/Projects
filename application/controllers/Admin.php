@@ -17,6 +17,18 @@ class Admin extends CI_Controller
 		$this->data['siswa'] = $this->Siswa->get_list();
 		$this->data['total'] = $this->Siswa->count(); //data statistik->partial/js.php
 		$this->data['kelas'] = $this->Siswa->get_kelas();
+		//load data guru
+		$this->load->model('M_Guru', 'Guru');
+		$this->data['guru'] = $this->Guru->get_list();
+		//load data kelas
+		$this->load->model('M_Kelas', 'Kelas');
+		$this->data['kelas'] = $this->Kelas->get_list();
+		$this->data['ckelas'] = $this->Kelas->count();
+		//load data jurusan
+		$this->load->model('M_Jurusan', 'Jurusan');
+		$this->data['jurusan'] = $this->Jurusan->get_list();
+		$this->data['cjurusan'] = $this->Jurusan->count();
+
 		//load data nilai
 		$this->load->model('M_Nilai', 'Nilai');
 		$this->data['nilai'] = $this->Nilai->get_list();
@@ -67,7 +79,8 @@ class Admin extends CI_Controller
 		$this->Kriteria->delete($id);
 		redirect("Admin/Kriteria");
 	}
-	public function Reset_kriteria(){
+	public function Reset_kriteria()
+	{
 		//nilai berpatok pada kriteia
 		//jika kriteria dihapus, nilai juga harus dihapus
 		$this->Nilai->reset_Data();
@@ -75,17 +88,22 @@ class Admin extends CI_Controller
 		redirect('Admin/Kriteria');
 	}
 	//siswa
-	public function Siswa()
+	public function Siswa($err = 0)
 	{
-
-
+		$this->data['err'] = $err;
+		// echo json_encode($this->data['kelas']);
 		$this->load->view('interface/siswa', $this->data);
 	}
 	public function Tambah_siswa()
 	{
 		if ($this->input->post('submit')) {
-			$this->Siswa->save();
-			redirect("Admin/Siswa");
+			$nis = $this->input->post('nis');
+			$c = $this->Siswa->isExist($nis);
+			if ($c->c > 0)
+				$err = 1;
+			else
+				$this->Siswa->save();
+			redirect("Admin/Siswa/" . $err);
 		}
 	}
 	public function Edit_siswa($nis)
@@ -101,11 +119,127 @@ class Admin extends CI_Controller
 		$this->Siswa->delete($nis);
 		redirect("Admin/Siswa");
 	}
-	public function Reset_Siswa(){
-		//nilai berpatok pada kriteia
-		//jika kriteria dihapus, nilai juga harus dihapus
+	public function Reset_Siswa()
+	{
+		//nilai berpatok pada Siswa
+		//jika Siswa dihapus, nilai juga harus dihapus
 		$this->Siswa->reset();
 		redirect('Admin/Siswa');
+	}
+	//guru
+	public function Guru($err = 0)
+	{
+		$this->data['err'] = $err;
+		$this->load->view('interface/guru', $this->data);
+	}
+	public function Tambah_guru()
+	{
+		if ($this->input->post('submit')) {
+			$nik = $this->input->post('nik');
+			$c = $this->Guru->isExist($nik);
+			if ($c->c > 0)
+				$err = 1;
+			else
+				$this->Guru->save();
+			redirect("Admin/Guru/" . $err);
+		}
+	}
+	public function Edit_guru($nik)
+	{
+		if ($this->input->post('submit')) {
+			$this->Guru->edit($nik);
+			redirect("Admin/Guru");
+		}
+	}
+	public function Hapus_guru($nik)
+	{
+		// $this->Nilai->delete($nik);
+		$this->Guru->delete($nik);
+		redirect("Admin/Guru");
+	}
+	public function Reset_guru()
+	{
+		$this->Guru->reset();
+		redirect('Admin/Guru');
+	}
+	//jurusan
+	public function Jurusan()
+	{
+		$this->load->view('interface/jurusan', $this->data);
+	}
+	public function Tambah_jurusan()
+	{
+		if ($this->input->post('submit')) {
+			$nik = $this->input->post('id');
+			$this->Jurusan->save();
+			redirect("Admin/Jurusan/");
+		}
+	}
+	public function Edit_jurusan($id)
+	{
+		if ($this->input->post('submit')) {
+			$this->Jurusan->edit($id);
+			redirect("Admin/Jurusan");
+		}
+	}
+	public function Hapus_jurusan($id)
+	{
+		// $this->Nilai->delete($nik);
+		// $this->Jurusan->delete($id);
+		$kel = $this->Kelas->byJurusan($id);
+		echo json_encode($kel);
+		foreach ($kel as $kelas) {
+			$this->Kelas->delete($kelas->id);
+			$this->Siswa->delKelas($kelas->id);
+		}
+		$this->Jurusan->delete($id);
+		redirect("Admin/Jurusan");
+	}
+	public function Reset_jurusan()
+	{
+		$this->Jurusan->reset();
+		$this->Kelas->reset();
+		$this->Siswa->reset();
+		redirect('Admin/Jurusan');
+	}
+	//kelas
+	public function Kelas($err = 0)
+	{
+		$this->data['err'] = $err;
+		$this->load->view('interface/kelas', $this->data);
+	}
+	public function Tambah_Kelas()
+	{
+		if ($this->input->post('submit')) {
+			$alias = $this->input->post('alias');
+			$jurusan = $this->input->post('jurusan');
+			$c = $this->Kelas->isExist($alias, $jurusan);
+			if ($c->c > 0)
+				$err = 1;
+			else
+				$this->Kelas->save();
+			redirect("Admin/Kelas/" . $err);
+		}
+	}
+	public function Edit_Kelas($id)
+	{
+		if ($this->input->post('submit')) {
+			$this->Kelas->edit($id);
+			redirect("Admin/Kelas");
+		}
+	}
+	public function Hapus_Kelas($id)
+	{
+		// $this->Nilai->delete($nik);
+		$this->Kelas->delete($id);
+		$this->Siswa->delKelas($id);
+		redirect("Admin/Kelas");
+	}
+	public function Reset_Kelas()
+	{
+		$this->Kelas->reset();
+		$this->Siswa->reset();
+		redirect('Admin/Kelas');
 	}
 	//nilai
 	public function Nilai()
@@ -133,7 +267,8 @@ class Admin extends CI_Controller
 		$this->Nilai->delete($id);
 		redirect("Admin/Nilai");
 	}
-	public function Reset_Nilai(){
+	public function Reset_Nilai()
+	{
 		$this->Nilai->reset_Data();
 		redirect('Admin/Nilai');
 	}
@@ -156,7 +291,7 @@ class Admin extends CI_Controller
 			if ($this->data['err'] > $this->data['csiswa']->c || $this->data['err'] < 0)
 				redirect('Admin/Proses/' . $this->data['err']);
 
-				//ambil data seluruh siswa
+			//ambil data seluruh siswa
 			foreach ($this->data['siswa'] as $siswa) {
 				//ambil data seluruh kriteria per siswa
 				foreach ($this->data['listkriteria'] as $kriteria) {
@@ -169,7 +304,7 @@ class Admin extends CI_Controller
 						//jika nilai ditemukan
 						if ($nilai->siswa == $siswa->nis && $nilai->kriteria == $kriteria->id) {
 							$num++;
-							
+
 							if ($kriteria->jenis == 'benefit') {
 								//jika benefit maka perhitnguan nilai/max
 								$max = $this->Nilai->get_max($nilai->kriteria)->m;
@@ -214,15 +349,15 @@ class Admin extends CI_Controller
 	{
 		$this->load->view('interface/hasil', $this->data);
 	}
-	public function Reset(){
+	public function Reset()
+	{
 		$this->Ranking->reset();
 		$this->Nilai->reset();
 		redirect('Admin/Ranking');
-
 	}
 	public function Cetak()
 	{
-		$text='
+		$text = '
 		<page>
 			<style>
 			table{
@@ -241,7 +376,7 @@ class Admin extends CI_Controller
 
 			</style>
 			<table cellspacing="30">';
-		$text.='
+		$text .= '
 				<tr>
 				<th>ID</th>
 				<th>NIS</th>
@@ -251,8 +386,8 @@ class Admin extends CI_Controller
 				<th>Keputusan</th>
 				</tr>
 				';
-		foreach($this->data['ranking'] as $r){
-			$text.="
+		foreach ($this->data['ranking'] as $r) {
+			$text .= "
 					<tr><td colspan='6' class='break'></td></tr>
 					<tr>
 					<td>$r->id</td>
@@ -263,7 +398,7 @@ class Admin extends CI_Controller
 					<td>$r->keputusan</td>
 					</tr>";
 		}
-		$text.='</table></page>';
+		$text .= '</table></page>';
 
 		include('./assets/src/html2pdf.class.php');
 		try {
@@ -278,6 +413,5 @@ class Admin extends CI_Controller
 		} catch (HTML2PDF_exception $e) {
 			echo $e;
 		}
-
 	}
 }
