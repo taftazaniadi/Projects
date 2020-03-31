@@ -227,7 +227,7 @@ class Admin extends CI_Controller
 			<style>
 			table{
 				border:1px solid black;
-				font-size:150%;
+				font-size:120%;
 				margin-top:60px;
 				margin-left:60px;
 				display:block;
