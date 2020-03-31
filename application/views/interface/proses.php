@@ -70,13 +70,13 @@
 
     <?php $this->load->view("_partials/js.php") ?>
     <script>
-        <?php if ($err != 0) {
-            $err = 0;
+        <?php if ($over != 0) {
+            $over = 0;
         ?>
             swal({
                 icon: 'warning',
                 title: 'Jumlah yang anda masukkan tidak valid',
-                text: 'Total siswa: '+ <?= $total->c ?>,
+                text: 'Total siswa yang valid: '+ <?= $csiswa->c ?>,
                 buttons: {
                     confirm: {
                         text: 'Mengerti',

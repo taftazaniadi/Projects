@@ -9,6 +9,18 @@ class M_Nilai extends CI_Model
         $this->db->join('siswa', 'siswa.nis = nilai.siswa');
         return $this->db->get('nilai')->result();
     }
+    public function get_distinct()
+    {
+        $this->db->select('siswa.nama, siswa.nis');
+        $this->db->join('siswa', 'siswa.nis = nilai.siswa');
+        $this->db->distinct();
+        return $this->db->get('nilai')->result();
+    }
+    public function count_distinct()
+    {
+        return $this->db->query('select count(*) as c from (SELECT DISTINCT(siswa) FROM `nilai`) as s')->row();
+        // return $this->db->get('nilai')->result();
+    }
     public function count()
     {
         $this->db->select('count(*) as c');
@@ -23,7 +35,20 @@ class M_Nilai extends CI_Model
     {
         $data = $this->input->post();
         array_pop($data);
-        $this->db->insert('nilai', $data);
+        //fetch data satu2 sesuai kriteria
+        foreach($data['k'] as $k){
+            $temp=Array(
+                'siswa'=>$data['siswa'],
+                'semester'=>$data['semester'],
+                'kriteria'=>$k['id'],
+                'nilai'=>$k['val'],
+                'normalisasi'=>0,
+                'preferensi'=>0
+            );
+        $this->db->insert('nilai', $temp);
+        }
+        // return $data;
+        // $this->db->insert('nilai', $data);
     }
     public function edit($id)
     {
@@ -34,7 +59,7 @@ class M_Nilai extends CI_Model
     }
     public function delete($id)
     {
-        $this->db->where('id', $id);
+        $this->db->where('siswa', $id);
         $this->db->delete('nilai');
     }
     public function get_max($id)
@@ -71,6 +96,10 @@ class M_Nilai extends CI_Model
         );
         $this->db->set($v);
         $this->db->update('nilai', $v);
+    }
+    public function reset_Kriteria($id){
+        $this->db->where('kriteria', $id);
+        $this->db->delete('nilai');
     }
     public function reset_Data(){
         $this->db->empty_table('nilai');

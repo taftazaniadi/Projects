@@ -20,6 +20,8 @@ class Admin extends CI_Controller
 		//load data nilai
 		$this->load->model('M_Nilai', 'Nilai');
 		$this->data['nilai'] = $this->Nilai->get_list();
+		$this->data['dsiswa'] = $this->Nilai->get_distinct();
+		$this->data['csiswa'] = $this->Nilai->count_distinct();
 		$this->data['count'] = $this->Nilai->count(); //data statistik->partial/js.php
 		$this->data['listnama'] = $this->Nilai->get_siswa();
 		//load data kriteria
@@ -61,6 +63,7 @@ class Admin extends CI_Controller
 	}
 	public function Hapus_kriteria($id)
 	{
+		$this->Nilai->Reset_kriteria($id);
 		$this->Kriteria->delete($id);
 		redirect("Admin/Kriteria");
 	}
@@ -94,6 +97,7 @@ class Admin extends CI_Controller
 	}
 	public function Hapus_siswa($nis)
 	{
+		$this->Nilai->delete($nis);
 		$this->Siswa->delete($nis);
 		redirect("Admin/Siswa");
 	}
@@ -111,7 +115,7 @@ class Admin extends CI_Controller
 	public function Tambah_nilai()
 	{
 		if ($this->input->post('submit')) {
-			$this->Nilai->save();
+			echo json_encode($this->Nilai->save());
 
 			redirect("Admin/Nilai");
 		}
@@ -137,7 +141,7 @@ class Admin extends CI_Controller
 	public function Proses($err = 0)
 	{
 		//cek apakah jumlah siswa mencukupi
-		$this->data['err'] = $err;
+		$this->data['over'] = $err;
 		$this->load->view('interface/proses', $this->data);
 	}
 	//SAW
@@ -146,11 +150,10 @@ class Admin extends CI_Controller
 		//mereset perhitungan sebelumnya (jika ada)
 		$this->Nilai->reset();
 		$this->Ranking->reset();
-
 		if ($this->input->post('submit')) {
 			$this->data['err'] = $this->input->post('jumlah');
 			//cek jumlah siswa memenuhi atau tidak
-			if ($this->data['err'] > $this->data['total']->c || $this->data['err'] < 0)
+			if ($this->data['err'] > $this->data['csiswa']->c || $this->data['err'] < 0)
 				redirect('Admin/Proses/' . $this->data['err']);
 
 				//ambil data seluruh siswa
@@ -264,7 +267,7 @@ class Admin extends CI_Controller
 
 		include('./assets/src/html2pdf.class.php');
 		try {
-			$html2pdf = new HTML2PDF('L', 'A4', 'en', true, 'UTF-8', array(0, 0, 0, 0));
+			$html2pdf = new HTML2PDF('P', 'A4', 'en', true, 'UTF-8', array(0, 0, 0, 0));
 			// $html2pdf->setDefaultFont("lucid");
 			$html2pdf->writeHTML($text);
 			// $url = $_SESSION['data']['no']."0".$_SESSION['data']['nim'];

@@ -58,7 +58,26 @@
                                         </div>
 
                                     </div>
+                                    <div class="d-flex align-items-center" style="margin-top:35px;">
+                                        <h4 class="card-title">&nbsp;</h4>
+                                        <div class="" style="position: absolute;right:0;margin-right:15px;margin-top:-0px;width:60%;display:flex;justify-content:flex-end;">
+                                            <select name="" id="hapusItem" class="form-control col-6" style="margin-left:30%;">
+                                                <option value="-5">--pilih siswa untuk dihapus--</option>
+                                                <?php
+                                                    foreach ($dsiswa as $data) {
+                                                        echo "<option value='$data->nis'>$data->nama</option>";
+                                                    }
+                                                ?>
+                                            </select>
+                                            <button onclick="hapus_nilai()" class="btn btn-danger btn-round ml-auto">
+                                                <i class="fa fa-trash"></i>
+                                                Hapus
+                                            </button>
+                                        </div>
+
+                                    </div>
                                 </div>
+
                                 <div class="card-body">
                                     <!-- Modal -->
                                     <div class="modal fade" id="addRowModal" tabindex="-1" role="dialog" aria-hidden="true">
@@ -96,22 +115,6 @@
                                                         <div class="row">
                                                             <div class="col-md-12">
                                                                 <div class="form-group form-group-default">
-                                                                    <label>Kriteria</label>
-                                                                    <select name='kriteria' class='form-control'>
-                                                                        <?php foreach ($listkriteria as $kriteria) {
-                                                                            echo '
-                                                                        <option value="' . $kriteria->id . '">' . $kriteria->nama . ' - (' . $kriteria->jenis . ')</option>
-                                                                        ';
-                                                                        }
-
-                                                                        ?>
-                                                                    </select>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col-md-6">
-                                                                <div class="form-group form-group-default">
                                                                     <label>Semester</label>
                                                                     <select class="form-control" name="semester">
 
@@ -121,13 +124,31 @@
                                                                     </select>
                                                                 </div>
                                                             </div>
-                                                            <div class="col-md-6">
-                                                                <div class="form-group form-group-default">
-                                                                    <label>nilai</label>
-                                                                    <input name="nilai" type="number" class="form-control" placeholder="ex: 90">
-                                                                </div>
-                                                            </div>
+
                                                         </div>
+                                                        <div class="row">
+
+                                                            <?php $i = 0;
+                                                            foreach ($listkriteria as $kriteria) {
+                                                                //     echo '
+                                                                // <option value="' . $kriteria->id . '">' . $kriteria->nama . ' - (' . $kriteria->jenis . ')</option>
+                                                                // ';
+                                                            ?>
+                                                                <div class="col-6">
+                                                                    <div class="form-group form-group-default">
+                                                                        <label><?= $kriteria->nama; ?></label>
+                                                                        <input name="k[<?= $i ?>][id]" type="hidden" value='<?= $kriteria->id ?>'>
+                                                                        <input name="k[<?= $i++ ?>][val]" class='form-control' type="number" min='1'>
+                                                                        </input>
+                                                                    </div>
+                                                                </div>
+                                                            <?php
+                                                            }
+
+                                                            ?>
+
+                                                        </div>
+
                                                         <div class="modal-footer no-bd">
                                                             <input type="submit" name="submit" value="submit" class="btn btn-primary"></input>
                                                             <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
@@ -171,22 +192,7 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="row">
-                                                            <div class="col-md-12">
-                                                                <div class="form-group form-group-default">
-                                                                    <label>Kriteria</label>
-                                                                    <select id="editKriteria" name='kriteria' class='form-control'>
-                                                                        <?php foreach ($listkriteria as $kriteria) {
-                                                                            echo '
-                                                                        <option value="' . $kriteria->id . '">' . $kriteria->nama . ' - (' . $kriteria->jenis . ')</option>
-                                                                        ';
-                                                                        }
-
-                                                                        ?>
-                                                                    </select>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                                                        
                                                         <div class="row">
                                                             <div class="col-md-6">
                                                                 <div class="form-group form-group-default">
@@ -231,7 +237,7 @@
                                                     <th>Semester</th>
                                                     <th style="max-width: 30px">Kriteria</th>
                                                     <th style="max-width: 30px">Nilai</th>
-                                                    <th style="width: 25%">Kelola</th>
+                                                    <th style="width: 30px">Kelola</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -252,7 +258,6 @@
                                                             <td>' . $data->nilai . '</td>
                                                             <td class="action">
                                                             <button class="edit-nilai btn btn-success btn-sm" data-toggle="modal" data-target="#editRowModal"><i class="fa fa-pen"></i> Edit</button>
-                                                            <button onclick="hapus_nilai(' . $data->nid . ')" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> Hapus</button></td>
                                                         </tr>
                                                         ';
                                                     }

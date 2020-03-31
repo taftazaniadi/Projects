@@ -206,8 +206,23 @@
 
     });
 
-    function hapus_nilai(id) {
-        swal({
+    function hapus_nilai() {
+        id=$('#hapusItem').val();
+        if(id<1){
+            swal({
+            icon: 'warning',
+            title: 'Peringatan: ',
+            text: 'Anda belum memilih nilai siswa untuk dihapus',
+            buttons: {
+                confirm: {
+                    text: 'Mengerti',
+                    className: 'btn btn-success'
+                }
+            }
+        })    
+        }
+        else{
+            swal({
             icon: 'warning',
             title: 'Peringatan: ',
             text: 'Yakin ingin menghapus nilai?',
@@ -226,6 +241,8 @@
                 document.location.href = 'Hapus_nilai/' + id;
 
         });
+        }
+        
     }
     $('#resetNilai').on('click',function(e){
         swal({
