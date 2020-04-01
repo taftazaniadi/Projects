@@ -59,24 +59,7 @@
                                         </div>
 
                                     </div>
-                                    <div class="d-flex align-items-center" style="margin-top:35px;">
-                                        <h4 class="card-title">&nbsp;</h4>
-                                        <div class="" style="position: absolute;right:0;margin-right:15px;margin-top:-0px;width:60%;display:flex;justify-content:flex-end;">
-                                            <select name="" id="hapusItem" class="form-control col-6" style="margin-left:30%;">
-                                                <option value="-5">--pilih siswa untuk dihapus--</option>
-                                                <?php
-                                                foreach ($dsiswa as $data) {
-                                                    echo "<option value='$data->nis'>$data->nama</option>";
-                                                }
-                                                ?>
-                                            </select>
-                                            <button onclick="hapus_nilai()" class="btn btn-danger btn-round ml-auto">
-                                                <i class="fa fa-trash"></i>
-                                                Hapus
-                                            </button>
-                                        </div>
-
-                                    </div>
+                                    
                                 </div>
 
                                 <div class="card-body">
@@ -234,36 +217,36 @@
                                         <table id="add-row" class="display table table-striped table-hover">
                                             <thead>
                                                 <tr>
-                                                    <th>Nama</th>
-                                                    <th>Semester</th>
-                                                    <th style="max-width: 30px">Kriteria</th>
-                                                    <th style="max-width: 30px">Nilai</th>
+                                                    <th>NIS</th>
+                                                    <th>Siswa</th>
+                                                    <th style="max-width: 30px">Semester</th>
+                                                    <th style="max-width: 30px">Kelas</th>
                                                     <th style="width: 30px">Kelola</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <?php
-                                                if (!empty($nilai)) {
+                                                if (!empty($siswa)) {
                                                     $no = 0;
-                                                    $strSmt = [];
-                                                    array_push($strSmt, 'ganjil');
-                                                    array_push($strSmt, 'genap');
-                                                    foreach ($nilai as $data) {
-
-                                                        $avg = floor(($data->nilai + $data->normalisasi + $data->preferensi) / 3);
+                                                    foreach ($listsiswa as $data) {
+                                                        if ($data->semester == 1)
+                                                            $data->semester = 'ganjil';
+                                                        else
+                                                            $data->semester = 'genap';
                                                         echo '
                                                         <tr>
-                                                            <td value="' . $data->nid . '" nis="' . $data->siswa . '">' . $data->nama . '</td>
-                                                            <td value="' . $data->semester . '">' . $strSmt[--$data->semester] . '</td>
-                                                            <td value="' . $data->kriteria . '">' . $data->knama . ' (' . $data->jenis . ')</td>
-                                                            <td>' . $data->nilai . '</td>
+                                                            <td>' . $data->nis . '</td>
+                                                            <td>' . $data->nama . '</td>
+                                                            <td>' . $data->semester . '</td>
+                                                            <td >' . $data->alias . ' - ' . $data->jurusan . '</td>
                                                             <td class="action">
-                                                            <button class="edit-nilai btn btn-success btn-sm" data-toggle="modal" data-target="#editRowModal"><i class="fa fa-pen"></i> Edit</button>
+                                                            <button class="edit-bt btn btn-success btn-sm" onclick=" document.location.href =`'.base_url() .'Admin/Nilai/'. $data->nis . '`"><i class="fa fa-external-link-square-alt"></i> Detail</button>
+                                                            <button onclick="hapus_nilai(' . $data->nis . ')" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> Hapus</button></td>
                                                         </tr>
                                                         ';
                                                     }
                                                 } else {
-                                                    echo '<tr><td colspan=7 style="text-align:center">data kosong</td></tr>';
+                                                    echo '<tr><td  colspan=5 style="text-align:center">data kosong</td></tr>';
                                                 }
                                                 ?>
                                             </tbody>
@@ -284,7 +267,7 @@
     <?php $this->load->view("_partials/js.php") ?>
     <script>
         <?php
-        if ($total->c<1) {
+        if ($total->c < 1) {
         ?>
             swal({
                 icon: 'warning',

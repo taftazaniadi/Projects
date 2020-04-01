@@ -241,8 +241,8 @@
     $('#resetSiswa').on('click',function(e){
         swal({
             icon: 'warning',
-            title: 'Are you sure?',
-            text: "You won't be able to get this data again!",
+            title: 'Catatan',
+            text: "Menghapus data ini temasuk menghapus data nilai",
             type: 'warning',
             buttons: {
                 confirm: {
@@ -262,9 +262,9 @@
     });
     $('#resetGuru').on('click',function(e){
         swal({
-            icon: 'warning',
-            title: 'Are you sure?',
-            text: "You won't be able to get this data again!",
+            icon: 'error',
+            title: 'Peringatan',
+            text: "Data siswa dan kelas ikut terhapus",
             type: 'warning',
             buttons: {
                 confirm: {
@@ -330,39 +330,20 @@
     $('.edit-nilai').on('click', function(e) {
         data = $(this).parent().parent();
         id = data.children().eq(0).attr('value');
-        nis = data.children().eq(0).attr('nis');
-        semester = data.children().eq(1).attr('value');
+        nis = data.children().eq(1).attr('value');
+        nilai = data.children().eq(1).html();
         kriteria = data.children().eq(2).attr('value');
-        akademik = data.children().eq(3).html();
-        prestasi = data.children().eq(4).html();
-        sikap = data.children().eq(5).html();
+        siswa = data.children().eq(3).attr('value');
 
-        $('#editSiswa').val(nis);
-        $('#editSmt').val(semester);
-        $('#editKriteria').val(kriteria);
-        $('#editnilai').val(akademik);
-        $('#editnormalisasi').val(prestasi);
-        $('#editpreferensi').val(sikap);
-        $("#form-edit").attr('action', 'Edit_nilai/' + id);
+        $('#editSiswa').html(siswa);
+        $('#editKriteria').html(kriteria);
+        $('#editnilai').val(nilai);
+        $("#form-edit").attr('action', '<?=base_url();?>Admin/Edit_nilai/' + id+'/'+nis);
 
     });
 
-    function hapus_nilai() {
-        id=$('#hapusItem').val();
-        if(id<1){
-            swal({
-            icon: 'warning',
-            title: 'Peringatan: ',
-            text: 'Anda belum memilih nilai siswa untuk dihapus',
-            buttons: {
-                confirm: {
-                    text: 'Mengerti',
-                    className: 'btn btn-success'
-                }
-            }
-        })    
-        }
-        else{
+    function hapus_nilai(id) {
+        
             swal({
             icon: 'warning',
             title: 'Peringatan: ',
@@ -384,7 +365,7 @@
         });
         }
         
-    }
+    
     $('#resetNilai').on('click',function(e){
         swal({
             icon: 'warning',

@@ -127,7 +127,7 @@
                                                         <div class="row">
                                                             <div class="col-sm-12">
                                                                 <div class="form-group form-group-default">
-                                                                    <label>NIS</label>
+                                                                    <label>NIK</label>
                                                                     <input id="editNik" name="nik" type="number" class="form-control" placeholder="ex: 6100000">
                                                                 </div>
                                                             </div>

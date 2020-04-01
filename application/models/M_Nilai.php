@@ -9,6 +9,22 @@ class M_Nilai extends CI_Model
         $this->db->join('siswa', 'siswa.nis = nilai.siswa');
         return $this->db->get('nilai')->result();
     }
+    public function bySiswa($nis)
+    {
+        $this->db->select('*,nilai.id as nid,kriteria.nama as knama, kriteria.id as kid');
+        $this->db->join('kriteria', 'kriteria.id = nilai.kriteria');
+        $this->db->join('siswa', 'siswa.nis = nilai.siswa');
+        $this->db->where('nis',$nis);
+        return $this->db->get('nilai')->result();
+    }
+    public function list_siswa()
+    {
+        $this->db->select('distinct(nis),siswa.nama, kelas.alias, jurusan.jurusan, nilai.semester');
+        $this->db->join('kelas', 'siswa.kelas = kelas.id');
+        $this->db->join('jurusan', 'jurusan.id = kelas.jurusan');
+        $this->db->join('nilai', 'nilai.siswa = siswa.nis');
+        return $this->db->get('siswa')->result();
+    }
     public function get_distinct()
     {
         $this->db->select('siswa.nama, siswa.nis');
@@ -24,6 +40,12 @@ class M_Nilai extends CI_Model
     public function count()
     {
         $this->db->select('count(*) as c');
+        return $this->db->get('nilai')->row();
+    }
+    public function count_siswa($nis)
+    {
+        $this->db->select('count(*) as c');
+        $this->db->where('siswa',$nis);
         return $this->db->get('nilai')->row();
     }
     public function get_siswa()

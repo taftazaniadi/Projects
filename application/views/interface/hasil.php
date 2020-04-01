@@ -47,16 +47,16 @@
                                     <div class="d-flex ">
                                         <h4 class="card-title">Tabel Data Ranking</h4>
                                         <div class="" style="position: absolute;right:0;margin-right:15px;margin-top:-8px;">
-                                        <button id="savePDF" class="btn btn-success btn-round ml-auto" data-toggle="modal" data-target="#addRowModal">
-                                            <i class="fa fa-download"></i>
-                                            Unduh PDF
-                                        </button>
-                                        <button id="resetBtn" class="btn btn-danger btn-round ml-auto" data-toggle="modal" data-target="#addRowModal">
-                                            <i class="fa fa-trash"></i>
-                                            Reset data ranking
-                                        </button>
+                                            <button id="savePDF" class="btn btn-success btn-round ml-auto" data-toggle="modal" data-target="#addRowModal">
+                                                <i class="fa fa-download"></i>
+                                                Unduh PDF
+                                            </button>
+                                            <button id="resetBtn" class="btn btn-danger btn-round ml-auto" data-toggle="modal" data-target="#addRowModal">
+                                                <i class="fa fa-trash"></i>
+                                                Reset data ranking
+                                            </button>
                                         </div>
-                                        
+
                                     </div>
                                 </div>
                                 <div class="card-body">
@@ -65,12 +65,11 @@
                                         <table class="display table table-striped table-hover">
                                             <thead>
                                                 <tr>
-                                                    <th>id</th>
+                                                    <th>Peringkat</th>
                                                     <th>NIS</th>
                                                     <th>Siswa</th>
                                                     <th>Total</th>
-                                                    <th style="max-width:30px">Peringkat</th>
-                                                    <th>Keputusan</th>
+                                                    <th>Kelas</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -80,12 +79,11 @@
                                                     foreach ($ranking as $data) {
                                                         echo '
                                                         <tr>
-                                                            <td>' . $data->id . '</td>
+                                                        <td>' . $data->peringkat . '</td>
                                                             <td>' . $data->nis . '</td>
                                                             <td>' . $data->nama . '</td>
                                                             <td>' . $data->total . '</td>
-                                                            <td>' . $data->peringkat . '</td>
-                                                            <td>' . $data->keputusan . '</td>
+                                                            <td>' . $data->alias . ' - ' . $data->jurusan . '</td>
                                                         </tr>
                                                         ';
                                                     }

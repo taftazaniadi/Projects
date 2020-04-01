@@ -248,6 +248,22 @@
                 document.location.href = 'Jurusan';
             })
         <?php
+        } else if($cguru->c<1){
+            ?>
+            swal({
+                icon: 'warning',
+                title: 'Guru belum ditambahkan',
+                text: 'Tambahkan terlebih dulu guru untuk menjadi wali kelas',
+                buttons: {
+                    confirm: {
+                        text: 'Mengerti',
+                        className: 'btn btn-success'
+                    }
+                }
+            }).then(res => {
+                document.location.href = 'Guru';
+            })
+            <?php
         } ?>
     </script>
     <script>
@@ -255,9 +271,9 @@
         if ($err > 0) {
         ?>
             swal({
-                icon: 'warning',
-                title: 'NIK sudah terdaftar sebagai Kelas',
-                text: 'Pastikan NIK yang anda masukkan tidak salah',
+                icon: 'error',
+                title: 'Kelas sudah terdaftar',
+                text: 'Pastikan menambahkan kelas yang belum terdaftar',
                 buttons: {
                     confirm: {
                         text: 'Mengerti',

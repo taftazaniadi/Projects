@@ -20,6 +20,7 @@ class Admin extends CI_Controller
 		//load data guru
 		$this->load->model('M_Guru', 'Guru');
 		$this->data['guru'] = $this->Guru->get_list();
+		$this->data['cguru'] = $this->Guru->count();
 		//load data kelas
 		$this->load->model('M_Kelas', 'Kelas');
 		$this->data['kelas'] = $this->Kelas->get_list();
@@ -36,6 +37,7 @@ class Admin extends CI_Controller
 		$this->data['csiswa'] = $this->Nilai->count_distinct();
 		$this->data['count'] = $this->Nilai->count(); //data statistik->partial/js.php
 		$this->data['listnama'] = $this->Nilai->get_siswa();
+		$this->data['listsiswa'] = $this->Nilai->list_siswa();
 		//load data kriteria
 		$this->load->model('M_Kriteria', 'Kriteria');
 		$this->data['kriteria'] = $this->Kriteria->count(); //data statistik->partial/js.php
@@ -75,6 +77,7 @@ class Admin extends CI_Controller
 	}
 	public function Hapus_kriteria($id)
 	{
+		$this->Ranking->reset();
 		$this->Nilai->Reset_kriteria($id);
 		$this->Kriteria->delete($id);
 		redirect("Admin/Kriteria");
@@ -83,6 +86,7 @@ class Admin extends CI_Controller
 	{
 		//nilai berpatok pada kriteia
 		//jika kriteria dihapus, nilai juga harus dihapus
+		$this->Ranking->reset();
 		$this->Nilai->reset_Data();
 		$this->Kriteria->reset();
 		redirect('Admin/Kriteria');
@@ -117,12 +121,17 @@ class Admin extends CI_Controller
 	{
 		$this->Nilai->delete($nis);
 		$this->Siswa->delete($nis);
+		$this->Ranking->reset();
+
 		redirect("Admin/Siswa");
 	}
 	public function Reset_Siswa()
 	{
 		//nilai berpatok pada Siswa
 		//jika Siswa dihapus, nilai juga harus dihapus
+		$this->Ranking->reset();
+		$this->Nilai->reset_Data();
+
 		$this->Siswa->reset();
 		redirect('Admin/Siswa');
 	}
@@ -154,12 +163,23 @@ class Admin extends CI_Controller
 	public function Hapus_guru($nik)
 	{
 		// $this->Nilai->delete($nik);
+		// $this->Kelas->delete($id);
+		// $this->Siswa->delKelas($id);
+		$r = $this->Kelas->byWali($nik);
+		foreach ($r as $perkelas) {
+			$this->Kelas->delete($perkelas->id);
+			$this->Siswa->delKelas($perkelas->id);
+		}
 		$this->Guru->delete($nik);
+		$this->Ranking->reset();
 		redirect("Admin/Guru");
 	}
 	public function Reset_guru()
 	{
+		$this->Kelas->reset();
+		$this->Siswa->reset();
 		$this->Guru->reset();
+		$this->Ranking->reset();
 		redirect('Admin/Guru');
 	}
 	//jurusan
@@ -193,6 +213,7 @@ class Admin extends CI_Controller
 			$this->Siswa->delKelas($kelas->id);
 		}
 		$this->Jurusan->delete($id);
+		$this->Ranking->reset();
 		redirect("Admin/Jurusan");
 	}
 	public function Reset_jurusan()
@@ -200,6 +221,7 @@ class Admin extends CI_Controller
 		$this->Jurusan->reset();
 		$this->Kelas->reset();
 		$this->Siswa->reset();
+		$this->Ranking->reset();
 		redirect('Admin/Jurusan');
 	}
 	//kelas
@@ -233,43 +255,56 @@ class Admin extends CI_Controller
 		// $this->Nilai->delete($nik);
 		$this->Kelas->delete($id);
 		$this->Siswa->delKelas($id);
+		$this->Ranking->reset();
 		redirect("Admin/Kelas");
 	}
 	public function Reset_Kelas()
 	{
 		$this->Kelas->reset();
 		$this->Siswa->reset();
+		$this->Ranking->reset();
 		redirect('Admin/Kelas');
 	}
 	//nilai
-	public function Nilai()
+	public function Nilai($nis = 0)
 	{
-		$this->load->view('interface/nilai', $this->data);
+		if ($nis == 0)
+			$this->load->view('interface/nilai', $this->data);
+		else {
+			$this->data['nilai'] = $this->Nilai->bySiswa($nis);
+			$this->load->view('interface/nilai_detail', $this->data);
+		}
 	}
 	public function Tambah_nilai()
 	{
 		if ($this->input->post('submit')) {
-			echo json_encode($this->Nilai->save());
-
-			redirect("Admin/Nilai");
+			$r = $this->Nilai->count_siswa($this->input->post('siswa'));
+			echo json_encode($r);
+			if ($r->c == 0) {
+				$this->Nilai->save();
+				redirect("Admin/Nilai");
+			} else
+				$this->load->view('interface/nilai_err');
 		}
 	}
-	public function Edit_nilai($id)
+	public function Edit_nilai($id, $nis)
 	{
 		if ($this->input->post('submit')) {
 			$this->Nilai->edit($id);
-			redirect("Admin/Nilai");
+			redirect("Admin/Nilai/" . $nis);
 		}
 		// echo json_encode($this->input->post);
 	}
 	public function Hapus_nilai($id)
 	{
 		$this->Nilai->delete($id);
+		$this->Ranking->reset();
 		redirect("Admin/Nilai");
 	}
 	public function Reset_Nilai()
 	{
 		$this->Nilai->reset_Data();
+		$this->Ranking->reset();
 		redirect('Admin/Nilai');
 	}
 	//proses SAW
@@ -363,12 +398,14 @@ class Admin extends CI_Controller
 			table{
 				border:1px solid black;
 				font-size:120%;
+				margin-left:40px;
 				margin-top:60px;
-				margin-left:60px;
 				display:block;
 			}
 			
-			
+			th{
+					text-align:center;
+			}
 			.break{
 				border-bottom:1px solid black;
 				padding:0;
@@ -378,11 +415,11 @@ class Admin extends CI_Controller
 			<table cellspacing="30">';
 		$text .= '
 				<tr>
-				<th>ID</th>
+				<th>Raking</th>
 				<th>NIS</th>
 				<th>Nama</th>
 				<th>Total</th>
-				<th>Raking</th>
+				<th>Kelas</th>
 				<th>Keputusan</th>
 				</tr>
 				';
@@ -390,11 +427,11 @@ class Admin extends CI_Controller
 			$text .= "
 					<tr><td colspan='6' class='break'></td></tr>
 					<tr>
-					<td>$r->id</td>
+					<td>$r->peringkat</td>
 					<td>$r->nis</td>
 					<td>$r->nama</td>
 					<td>$r->total</td>
-					<td>$r->peringkat</td>
+					<td>$r->alias ($r->jurusan)</td>
 					<td>$r->keputusan</td>
 					</tr>";
 		}
@@ -402,7 +439,7 @@ class Admin extends CI_Controller
 
 		include('./assets/src/html2pdf.class.php');
 		try {
-			$html2pdf = new HTML2PDF('P', 'A4', 'en', true, 'UTF-8', array(0, 0, 0, 0));
+			$html2pdf = new HTML2PDF('L', 'A4', 'en', true, 'UTF-8', array(0, 0, 0, 0));
 			// $html2pdf->setDefaultFont("lucid");
 			$html2pdf->writeHTML($text);
 			// $url = $_SESSION['data']['no']."0".$_SESSION['data']['nim'];

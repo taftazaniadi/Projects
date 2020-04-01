@@ -38,6 +38,11 @@ class M_Kelas extends CI_Model{
         $this->db->where('jurusan',$id);
         return $this->db->get('kelas')->result();
     }
+    public function byWali($id){
+        $this->db->select('id');
+        $this->db->where('wali',$id);
+        return $this->db->get('kelas')->result();
+    }
     public function reset(){
         $this->db->empty_table('kelas');
     }

@@ -4,6 +4,10 @@ class M_Guru extends CI_Model{
     public function get_list(){
         return $this->db->get('guru')->result();
     }
+    public function count(){
+        $this->db->select('count(*) as c');
+        return $this->db->get('guru')->row();
+    }
     //dml
     public function save(){
         $data = $this->input->post();
