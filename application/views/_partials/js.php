@@ -55,7 +55,7 @@
         value: 100,
         maxValue: 100,
         width: 7,
-        text: <?php echo $kriteria->c; ?>,
+        text: '<?php echo $kriteria->c; ?>',
         colors: ['#f1f1f1', '#FF9E27'],
         duration: 400,
         wrpClass: 'circles-wrp',
@@ -70,7 +70,7 @@
         value: 100,
         maxValue: 100,
         width: 7,
-        text: <?php echo $total->c; ?>,
+        text: '<?php echo $total->c; ?>',
         colors: ['#f1f1f1', '#2BB930'],
         duration: 400,
         wrpClass: 'circles-wrp',
@@ -86,7 +86,7 @@
         value: 100,
         maxValue: 100,
         width: 7,
-        text: <?php echo $csiswa->c; ?>,
+        text: '<?php echo $csiswa->c; ?>',
         colors: ['#f1f1f1', '#F28391'],
         duration: 400,
         wrpClass: 'circles-wrp',
@@ -101,7 +101,7 @@
         value: 100,
         maxValue: 100,
         width: 7,
-        text: <?php echo $listacc->c; ?>,
+        text: '<?php echo $listacc->c; ?>',
         colors: ['#f1f1f1', '#6610f2'],
         duration: 400,
         wrpClass: 'circles-wrp',
@@ -122,7 +122,7 @@
         $('#editNis').val(nis);
         $('#editNama').val(nama);
         $('#editKelas').val(kelas);
-        $("#form-edit").attr('action', 'Edit_siswa/' + nis);
+        $("#form-edit").attr('action', '<?=base_url();?>Admin/Edit_siswa/' + nis);
 
     });
     $('.edit-guru').on('click', function(e) {
@@ -132,14 +132,18 @@
 
         $('#editNik').val(nik);
         $('#editNama').val(nama);
-        $("#form-edit").attr('action', 'Edit_guru/' + nik);
+        $("#form-edit").attr('action', '<?=base_url();?>Admin/Edit_guru/' + nik);
 
     });
     $('.edit-Kelas').on('click', function(e) {
         data = $(this).parent().parent();
         id = data.children().eq(0).html();
+        alias = data.children().eq(1).html();
+        jurusan = data.children().eq(2).attr('value');
         wali = data.children().eq(3).attr('value');
 
+        $('#editAlias').val(alias);
+        $('#editJurusan').val(jurusan);
         $('#editWali').val(wali);
         $("#form-edit").attr('action', '<?=base_url();?>Admin/Edit_kelas/' + id);
 
@@ -171,7 +175,7 @@
             }
         }).then((result) => {
             if (result)
-                document.location.href = 'Hapus_siswa/' + nis;
+                document.location.href = '<?=base_url();?>Admin/Hapus_siswa/' + nis;
 
         });
     }
@@ -192,7 +196,7 @@
             }
         }).then((result) => {
             if (result)
-                document.location.href = 'Hapus_guru/' + nik;
+                document.location.href = '<?=base_url();?>Admin/Hapus_guru/' + nik;
 
         });
     }
@@ -213,7 +217,7 @@
             }
         }).then((result) => {
             if (result)
-                document.location.href = 'Hapus_jurusan/' + id;
+                document.location.href = '<?=base_url();?>Admin/Hapus_jurusan/' + id;
 
         });
     }
@@ -234,7 +238,7 @@
             }
         }).then((result) => {
             if (result)
-                document.location.href = 'Hapus_kelas/' + id;
+                document.location.href = '<?=base_url();?>Admin/Hapus_kelas/' + id;
 
         });
     }
@@ -278,7 +282,7 @@
             }
         }).then((result) => {
             if (result) {
-                document.location.href = 'Reset_guru';
+                document.location.href = '<?=base_url();?>Admin/Reset_guru';
             }
         });
     });
@@ -300,7 +304,7 @@
             }
         }).then((result) => {
             if (result) {
-                document.location.href = 'Reset_jurusan';
+                document.location.href = '<?=base_url();?>Admin/Reset_jurusan';
             }
         });
     });
@@ -360,7 +364,7 @@
             }
         }).then((result) => {
             if (result)
-                document.location.href = 'Hapus_nilai/' + id;
+                document.location.href = '<?=base_url();?>Admin/Hapus_nilai/' + id;
 
         });
         }
@@ -384,7 +388,7 @@
             }
         }).then((result) => {
             if (result) {
-                document.location.href = 'Reset_Nilai';
+                document.location.href = '<?=base_url();?>Admin/Reset_Nilai';
             }
         });
     });
@@ -399,7 +403,7 @@
         $('#editNama').val(nama);
         $('#editJenis').val(jenis);
         $('#editBobot').val(bobot);
-        $("#form-edit").attr('action', 'Edit_kriteria/' + id);
+        $("#form-edit").attr('action', '<?=base_url();?>Admin/Edit_kriteria/' + id);
 
     });
 
@@ -420,7 +424,7 @@
             }
         }).then((result) => {
             if (result)
-                document.location.href = 'Hapus_kriteria/' + id;
+                document.location.href = '<?=base_url();?>Admin/Hapus_kriteria/' + id;
 
         });
     }
@@ -442,7 +446,7 @@
             }
         }).then((result) => {
             if (result) {
-                document.location.href = 'Reset_Kriteria';
+                document.location.href = '<?=base_url();?>Admin/Reset_Kriteria';
             }
         });
     });

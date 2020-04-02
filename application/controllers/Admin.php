@@ -268,6 +268,7 @@ class Admin extends CI_Controller
 	//nilai
 	public function Nilai($nis = 0)
 	{
+		$this->data['p2']=$this->Kriteria->is100();
 		if ($nis == 0)
 			$this->load->view('interface/nilai', $this->data);
 		else {
@@ -382,6 +383,19 @@ class Admin extends CI_Controller
 	}
 	public function Ranking()
 	{
+		$r=$this->Nilai->get_siswa_dist();
+		$hasil=[];
+		foreach($r as $siswa){
+			$nilai = $this->Nilai->get_nilai($siswa->nis);
+			$h=Array(
+				'nis'=>$siswa->nis,
+				'siswa'=>$siswa->nama,
+				'nilai'=>$nilai
+			);
+			array_push($hasil,$h);
+		}
+		$this->data['th']=$hasil[0]['nilai'];
+		$this->data['proses']=$hasil;
 		$this->load->view('interface/hasil', $this->data);
 	}
 	public function Reset()
@@ -395,16 +409,32 @@ class Admin extends CI_Controller
 		$text = '
 		<page>
 			<style>
+			h1{
+				text-align:center;
+				margin-top:20px;
+			}
 			table{
 				border:1px solid black;
-				font-size:120%;
+				font-size:70%;
 				margin-left:40px;
 				margin-top:60px;
 				display:block;
 			}
 			
 			th{
+				border:1px solid black;
 					text-align:center;
+					padding-top:10px;
+					padding-bottom:10px;
+					padding-left:10px;
+					padding-right:10px;
+			}
+			td{
+				border:1px solid black;
+				padding-top:10px;
+				padding-bottom:10px;
+				padding-left:10px;
+				padding-right:10px;
 			}
 			.break{
 				border-bottom:1px solid black;
@@ -412,7 +442,7 @@ class Admin extends CI_Controller
 			}
 
 			</style>
-			<table cellspacing="30">';
+			<h1>Tabel Hasil Akhir penentuan siswa berprestasi<table cellspacing="0">';
 		$text .= '
 				<tr>
 				<th>Raking</th>
@@ -425,7 +455,7 @@ class Admin extends CI_Controller
 				';
 		foreach ($this->data['ranking'] as $r) {
 			$text .= "
-					<tr><td colspan='6' class='break'></td></tr>
+					
 					<tr>
 					<td>$r->peringkat</td>
 					<td>$r->nis</td>
@@ -435,7 +465,7 @@ class Admin extends CI_Controller
 					<td>$r->keputusan</td>
 					</tr>";
 		}
-		$text .= '</table></page>';
+		$text .= '</table></h1></page>';
 
 		include('./assets/src/html2pdf.class.php');
 		try {

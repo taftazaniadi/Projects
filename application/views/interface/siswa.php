@@ -47,15 +47,18 @@
                                     <div class="d-flex align-items-center">
                                         <h4 class="card-title">Tabel Data Siswa</h4>
                                         <div class="" style="position: absolute;right:0;margin-right:15px;margin-top:-0px;">
-
-                                        <button class="btn btn-primary btn-round ml-auto" data-toggle="modal" data-target="#addRowModal">
-                                            <i class="fa fa-plus"></i>
-                                            Tambah Siswa
-                                        </button>
-                                        <button id="resetSiswa" class="btn btn-danger btn-round ml-auto">
-                                                <i class="fa fa-trash"></i>
-                                                Hapus semua
-                                            </button>
+                                            <?php
+                                            if ($ckelas->c > 0) {
+                                            ?>
+                                                <button class="btn btn-primary btn-round ml-auto" data-toggle="modal" data-target="#addRowModal">
+                                                    <i class="fa fa-plus"></i>
+                                                    Tambah Siswa
+                                                </button>
+                                                <button id="resetSiswa" class="btn btn-danger btn-round ml-auto">
+                                                    <i class="fa fa-trash"></i>
+                                                    Hapus semua
+                                                </button>
+                                            <?php } ?>
                                         </div>
                                     </div>
                                 </div>
@@ -78,7 +81,7 @@
                                                 </div>
                                                 <div class="modal-body">
                                                     <p class="small">Tambah siswa baru</p>
-                                                    <form action="<?=base_url();?>Admin/Tambah_siswa" method="POST">
+                                                    <form action="<?= base_url(); ?>Admin/Tambah_siswa" method="POST">
                                                         <div class="row">
                                                             <div class="col-sm-12">
                                                                 <div class="form-group form-group-default">
@@ -86,7 +89,7 @@
                                                                     <input name="nis" type="number" class="form-control" placeholder="ex: 6100000">
                                                                 </div>
                                                             </div>
-                                                            <div class="col-md-6 pr-0">
+                                                            <div class="col-md-6">
                                                                 <div class="form-group form-group-default">
                                                                     <label>Nama</label>
                                                                     <input name="nama" type="text" class="form-control" placeholder="ex: Faizal">
@@ -233,7 +236,7 @@
     <?php $this->load->view("_partials/js.php") ?>
     <script>
         <?php
-        if ($ckelas->c<1) {
+        if ($ckelas->c < 1) {
         ?>
             swal({
                 icon: 'warning',
@@ -245,15 +248,13 @@
                         className: 'btn btn-success'
                     }
                 }
-            }).then(res => {
-                document.location.href = 'Kelas';
             })
         <?php
         } ?>
     </script>
     <script>
         <?php
-        if ($err>0) {
+        if ($err > 0) {
         ?>
             swal({
                 icon: 'warning',

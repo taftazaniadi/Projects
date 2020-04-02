@@ -2,7 +2,7 @@
     defined('BASEPATH') or exit('No direct script access allowed');
 class M_Kelas extends CI_Model{
     public function get_list(){
-        $this->db->select('*,kelas.id as kid, guru.nik as gid');
+        $this->db->select('*,kelas.id as kid, guru.nik as gid, jurusan.id as jid');
         $this->db->join('jurusan','jurusan.id=kelas.jurusan');
         $this->db->join('guru','guru.nik=kelas.wali');
         return $this->db->get('kelas')->result();

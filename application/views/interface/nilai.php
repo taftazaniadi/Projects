@@ -48,18 +48,22 @@
                                     <div class="d-flex align-items-center">
                                         <h4 class="card-title">Tabel Data nilai</h4>
                                         <div class="" style="position: absolute;right:0;margin-right:15px;margin-top:-0px;">
-                                            <button class="btn btn-primary btn-round ml-auto" data-toggle="modal" data-target="#addRowModal">
-                                                <i class="fa fa-plus"></i>
-                                                Tambah nilai
-                                            </button>
-                                            <button id="resetNilai" class="btn btn-danger btn-round ml-auto">
-                                                <i class="fa fa-trash"></i>
-                                                Hapus semua
-                                            </button>
+                                            <?php
+                                            if ($total->c > 0 && $k->c > 2 && $k->c < 11 && $p2->c ==100) {
+                                            ?>
+                                                <button class="btn btn-primary btn-round ml-auto" data-toggle="modal" data-target="#addRowModal">
+                                                    <i class="fa fa-plus"></i>
+                                                    Tambah nilai
+                                                </button>
+                                                <button id="resetNilai" class="btn btn-danger btn-round ml-auto">
+                                                    <i class="fa fa-trash"></i>
+                                                    Hapus semua
+                                                </button>
+                                            <?php } ?>
                                         </div>
 
                                     </div>
-                                    
+
                                 </div>
 
                                 <div class="card-body">
@@ -240,7 +244,7 @@
                                                             <td>' . $data->semester . '</td>
                                                             <td >' . $data->alias . ' - ' . $data->jurusan . '</td>
                                                             <td class="action">
-                                                            <button class="edit-bt btn btn-success btn-sm" onclick=" document.location.href =`'.base_url() .'Admin/Nilai/'. $data->nis . '`"><i class="fa fa-external-link-square-alt"></i> Detail</button>
+                                                            <button class="edit-bt btn btn-success btn-sm" onclick=" document.location.href =`' . base_url() . 'Admin/Nilai/' . $data->nis . '`"><i class="fa fa-external-link-square-alt"></i> Detail</button>
                                                             <button onclick="hapus_nilai(' . $data->nis . ')" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> Hapus</button></td>
                                                         </tr>
                                                         ';
@@ -279,9 +283,26 @@
                         className: 'btn btn-success'
                     }
                 }
-            }).then(res => {
-                document.location.href = 'Siswa';
             })
+        <?php
+        } ?>
+    </script>
+    <script>
+        <?php
+        if ($p2->c !=100) {
+        ?>
+            swal({
+                icon: 'warning',
+                title: 'Peringatan',
+                text: 'Jumlah bobot keseluruhan kriteria harus genap 100',
+                buttons: {
+                    confirm: {
+                        text: 'Mengerti',
+                        className: 'btn btn-success'
+                    }
+                }
+            })
+            // alert('tidak 100');
         <?php
         } ?>
     </script>
@@ -299,11 +320,7 @@
                         className: 'btn btn-success'
                     }
                 }
-            }).then((result) => {
-                if (result)
-                    document.location.href = 'Kriteria/';
-
-            });
+            })
         <?php
         } ?>
     </script>

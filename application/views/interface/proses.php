@@ -45,7 +45,7 @@
                                                 <div class="col-sm-6">
                                                     <div class="form-group form-group-default">
                                                         <label>Kuota</label>
-                                                        <input id="jumlah" name="jumlah" type="number" class="form-control" min='1' placeholder="ex: 30">
+                                                        <input id="jumlah" name="jumlah" type="number" class="form-control" min='1' placeholder="ex: 30" value="1">
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-6">

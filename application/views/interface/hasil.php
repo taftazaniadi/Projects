@@ -59,7 +59,125 @@
 
                                     </div>
                                 </div>
-                                <div class="card-body">
+                                <!-- niali kriteria -->
+                                <div class="card-header">
+                                    <h4 class="card-title">Tabel nilai berdasarkan kriteria</h4>
+
+                                    <div class="table-responsive" id="kontenExport">
+                                        <table class="display table table-striped table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>NIS</th>
+                                                    <th>Siswa</th>
+                                                    <?php
+                                                    foreach ($th as $head) {
+                                                        echo "<th>$head->knama</th>";
+                                                    }
+                                                    ?>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php
+                                                if (!empty($proses)) {
+                                                    $no = 0;
+                                                    foreach ($proses as $data) {
+                                                        echo '
+                                                        <tr>
+                                                        <td>' . $data['nis'] . '</td>
+                                                            <td>' . $data['siswa'] . '</td>';
+                                                        foreach ($data['nilai'] as $nilai) {
+                                                            echo "<td>$nilai->nilai</td>";
+                                                        }
+                                                    }
+                                                } else {
+                                                    echo '<tr><td  colspan=6 style="text-align:center">data kosong</td></tr>';
+                                                }
+                                                ?>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <!-- end nilai kriteria -->
+                                <!-- niali normalisasi -->
+                                <div class="card-header">
+                                    <h4 class="card-title">Tabel nilai normalisasi</h4>
+
+                                    <div class="table-responsive" id="kontenExport">
+                                        <table class="display table table-striped table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>NIS</th>
+                                                    <th>Siswa</th>
+                                                    <?php
+                                                    foreach ($th as $head) {
+                                                        echo "<th>$head->knama</th>";
+                                                    }
+                                                    ?>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php
+                                                if (!empty($proses)) {
+                                                    $no = 0;
+                                                    foreach ($proses as $data) {
+                                                        echo '
+                                                        <tr>
+                                                        <td>' . $data['nis'] . '</td>
+                                                            <td>' . $data['siswa'] . '</td>';
+                                                        foreach ($data['nilai'] as $nilai) {
+                                                            echo "<td>$nilai->normalisasi</td>";
+                                                        }
+                                                    }
+                                                } else {
+                                                    echo '<tr><td  colspan=6 style="text-align:center">data kosong</td></tr>';
+                                                }
+                                                ?>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <!-- end nilai normalisasi -->
+                                  <!-- niali prefertensi -->
+                                  <div class="card-header">
+                                <h4 class="card-title">Tabel nilai preferensi (normalisasi * bobot kriteria)</h4>
+
+                                    <div class="table-responsive" id="kontenExport">
+                                        <table class="display table table-striped table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>NIS</th>
+                                                    <th>Siswa</th>
+                                                    <?php 
+                                                    foreach($th as $head){
+                                                        echo "<th>$head->knama</th>";
+                                                    }
+                                                    ?>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php
+                                                if (!empty($proses)) {
+                                                    $no = 0;
+                                                    foreach ($proses as $data) {
+                                                        echo '
+                                                        <tr>
+                                                        <td>' . $data['nis'] . '</td>
+                                                            <td>' . $data['siswa'] . '</td>';
+                                                            foreach($data['nilai'] as $nilai){
+                                                                echo "<td>$nilai->preferensi</td>";
+                                                            }
+                                                    }
+                                                } else {
+                                                    echo '<tr><td  colspan=6 style="text-align:center">data kosong</td></tr>';
+                                                }
+                                                ?>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+<!-- end nilai preferensi -->
+                                <div class="card-header">
+                                <h4 class="card-title">Hasil akhir</h4>
 
                                     <div class="table-responsive" id="kontenExport">
                                         <table class="display table table-striped table-hover">
@@ -68,8 +186,9 @@
                                                     <th>Peringkat</th>
                                                     <th>NIS</th>
                                                     <th>Siswa</th>
-                                                    <th>Total</th>
                                                     <th>Kelas</th>
+                                                    <th>Total</th>
+                                                    <th>Keputusan</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -78,14 +197,15 @@
                                                     $no = 0;
                                                     foreach ($ranking as $data) {
                                                         echo '
-                                                        <tr>
-                                                        <td>' . $data->peringkat . '</td>
-                                                            <td>' . $data->nis . '</td>
-                                                            <td>' . $data->nama . '</td>
-                                                            <td>' . $data->total . '</td>
-                                                            <td>' . $data->alias . ' - ' . $data->jurusan . '</td>
-                                                        </tr>
-                                                        ';
+                    <tr>
+                    <td>' . $data->peringkat . '</td>
+                        <td>' . $data->nis . '</td>
+                        <td>' . $data->nama . '</td>
+                        <td>' . $data->alias . ' - ' . $data->jurusan . '</td>
+                        <td>' . $data->total . '</td>
+                        <td>' . $data->keputusan . '</td>
+                    </tr>
+                    ';
                                                     }
                                                 } else {
                                                     echo '<tr><td  colspan=6 style="text-align:center">data kosong</td></tr>';

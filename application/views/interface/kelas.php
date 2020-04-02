@@ -47,15 +47,18 @@
                                     <div class="d-flex align-items-center">
                                         <h4 class="card-title">Tabel Data Kelas</h4>
                                         <div class="" style="position: absolute;right:0;margin-right:15px;margin-top:-0px;">
-
-                                            <button class="btn btn-primary btn-round ml-auto" data-toggle="modal" data-target="#addRowModal">
-                                                <i class="fa fa-plus"></i>
-                                                Tambah Kelas
-                                            </button>
-                                            <button id="resetKelas" class="btn btn-danger btn-round ml-auto">
-                                                <i class="fa fa-trash"></i>
-                                                Hapus semua
-                                            </button>
+                                            <?php
+                                            if ($cjurusan->c > 0 && $cguru->c > 0) {
+                                            ?>
+                                                <button class="btn btn-primary btn-round ml-auto" data-toggle="modal" data-target="#addRowModal">
+                                                    <i class="fa fa-plus"></i>
+                                                    Tambah Kelas
+                                                </button>
+                                                <button id="resetKelas" class="btn btn-danger btn-round ml-auto">
+                                                    <i class="fa fa-trash"></i>
+                                                    Hapus semua
+                                                </button>
+                                            <?php } ?>
                                         </div>
                                     </div>
                                 </div>
@@ -83,11 +86,8 @@
                                                             <div class="col-sm-12">
                                                                 <div class="form-group form-group-default">
                                                                     <label>Kelas</label>
-                                                                    <select name="alias" id="" class="form-control">
-                                                                        <option value="X">X</option>
-                                                                        <option value="XI">XI</option>
-                                                                        <option value="XII">XII</option>
-                                                                    </select>
+
+                                                                    <input type="text" name="alias" id="" class="form-control">
                                                                 </div>
                                                             </div>
                                                             <div class="col-sm-12">
@@ -152,7 +152,27 @@
                                                     <p class="small">edit Kelas</p>
                                                     <form action="#" id="form-edit" method="POST">
                                                         <div class="row">
-                                                            
+                                                            <div class="col-sm-12">
+                                                                <div class="form-group form-group-default">
+                                                                    <label>Kelas</label>
+
+                                                                    <input type="text" name="alias" id="editAlias" class="form-control">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-12">
+                                                                <div class="form-group form-group-default">
+                                                                    <label>Jurusan</label>
+                                                                    <select name="jurusan" id="editJurusan" class="form-control">
+                                                                        <?php
+                                                                        foreach ($jurusan as $j) {
+                                                                            echo "
+                                                                        <option value='$j->id'>$j->jurusan</option>
+                                                                        ";
+                                                                        }
+                                                                        ?>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
                                                             <div class="col-sm-12">
                                                                 <div class="form-group form-group-default">
                                                                     <label>Wali Kelas</label>
@@ -202,8 +222,8 @@
                                                         <tr>
                                                             <td>' . $data->kid . '</td>
                                                             <td>' . $data->alias . '</td>
-                                                            <td>' . $data->jurusan . '</td>
-                                                            <td value="'.$data->gid.'">' . $data->nama . '</td>
+                                                            <td value="' . $data->jid . '">' . $data->jurusan . '</td>
+                                                            <td value="' . $data->gid . '">' . $data->nama . '</td>
                                                             <td class="action">
                                                             <button class="edit-Kelas btn btn-success btn-sm" data-toggle="modal" data-target="#editRowModal"><i class="fa fa-pen"></i> Edit</button>
                                                             <button onclick="hapus_kelas(' . $data->kid . ')" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> Hapus</button></td>
@@ -232,7 +252,7 @@
     <?php $this->load->view("_partials/js.php") ?>
     <script>
         <?php
-        if ($cjurusan->c<1) {
+        if ($cjurusan->c < 1) {
         ?>
             swal({
                 icon: 'warning',
@@ -244,12 +264,10 @@
                         className: 'btn btn-success'
                     }
                 }
-            }).then(res => {
-                document.location.href = 'Jurusan';
             })
         <?php
-        } else if($cguru->c<1){
-            ?>
+        } else if ($cguru->c < 1) {
+        ?>
             swal({
                 icon: 'warning',
                 title: 'Guru belum ditambahkan',
@@ -260,10 +278,8 @@
                         className: 'btn btn-success'
                     }
                 }
-            }).then(res => {
-                document.location.href = 'Guru';
             })
-            <?php
+        <?php
         } ?>
     </script>
     <script>

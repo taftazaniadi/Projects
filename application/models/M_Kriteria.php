@@ -6,6 +6,10 @@ class M_Kriteria extends CI_Model
         $this->db->select('count(*) as c');
         return $this->db->get('kriteria')->row();
     }
+    public function is100(){
+        $this->db->select('sum(bobot) as c');
+        return $this->db->get('kriteria')->row();
+    }
     public function get_list(){
         return $this->db->get('kriteria')->result();
     }
