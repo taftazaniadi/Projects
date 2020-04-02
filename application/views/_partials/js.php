@@ -326,7 +326,7 @@
             }
         }).then((result) => {
             if (result) {
-                document.location.href = '<?=base_url();?>Admin/Reset_kelas/';
+                document.location.href = '<?=base_url();?>Admin/Reset_kelas';
             }
         });
     });

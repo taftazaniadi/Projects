@@ -192,7 +192,7 @@ class Admin extends CI_Controller
 		if ($this->input->post('submit')) {
 			$nik = $this->input->post('id');
 			$this->Jurusan->save();
-			redirect("Admin/Jurusan/");
+			redirect("Admin/Jurusan");
 		}
 	}
 	public function Edit_jurusan($id)
