@@ -183,27 +183,25 @@
                                         <table class="display table table-striped table-hover">
                                             <thead>
                                                 <tr>
-                                                    <th>Peringkat</th>
-                                                    <th>NIS</th>
-                                                    <th>Siswa</th>
+                                                    <th>NO</th>
                                                     <th>Kelas</th>
+                                                    <th>Jurusan</th>
                                                     <th>Total</th>
-                                                    <th>Keputusan</th>
+                                                    <th>Kelola</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <?php
-                                                if (!empty($ranking)) {
+                                                if (!empty($hasilkelas)) {
                                                     $no = 0;
-                                                    foreach ($ranking as $data) {
+                                                    foreach ($hasilkelas as $data) {
                                                         echo '
                     <tr>
-                    <td>' . $data->peringkat . '</td>
-                        <td>' . $data->nis . '</td>
-                        <td>' . $data->nama . '</td>
-                        <td>' . $data->alias . ' - ' . $data->jurusan . '</td>
+                    <td>' . ++$no . '</td>
+                        <td>' . $data->kelas . '</td>
+                        <td>' . $data->jurusan . '</td>
                         <td>' . $data->total . '</td>
-                        <td>' . $data->keputusan . '</td>
+                        <td><button class="btn btn-success" onclick="goto('.$data->id.')">Detail</button></td>
                     </tr>
                     ';
                                                     }
@@ -227,6 +225,11 @@
     </div>
 
     <?php $this->load->view("_partials/js.php") ?>
+    <script>
+        function goto(id){
+            window.location.href="<?=base_url();?>Admin/Ranking/"+id;
+        }
+    </script>
 </body>
 
 </html>

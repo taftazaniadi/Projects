@@ -268,7 +268,7 @@ class Admin extends CI_Controller
 	//nilai
 	public function Nilai($nis = 0)
 	{
-		$this->data['p2']=$this->Kriteria->is100();
+		$this->data['p2'] = $this->Kriteria->is100();
 		if ($nis == 0)
 			$this->load->view('interface/nilai', $this->data);
 		else {
@@ -381,22 +381,29 @@ class Admin extends CI_Controller
 			redirect('Admin/proses');
 		}
 	}
-	public function Ranking()
+	public function Ranking($kelas = 0)
 	{
-		$r=$this->Nilai->get_siswa_dist();
-		$hasil=[];
-		foreach($r as $siswa){
+		$r = $this->Nilai->get_siswa_dist();
+		$hasil = [];
+		foreach ($r as $siswa) {
 			$nilai = $this->Nilai->get_nilai($siswa->nis);
-			$h=Array(
-				'nis'=>$siswa->nis,
-				'siswa'=>$siswa->nama,
-				'nilai'=>$nilai
+			$h = array(
+				'nis' => $siswa->nis,
+				'siswa' => $siswa->nama,
+				'nilai' => $nilai
 			);
-			array_push($hasil,$h);
+			array_push($hasil, $h);
 		}
-		$this->data['th']=$hasil[0]['nilai'];
-		$this->data['proses']=$hasil;
-		$this->load->view('interface/hasil', $this->data);
+		$this->data['th'] = $hasil[0]['nilai'];
+		$this->data['proses'] = $hasil;
+		$this->data['hasilkelas'] = $this->Ranking->get_kelas();
+		if ($kelas == 0)
+			$this->load->view('interface/hasil', $this->data);
+		else {
+			$this->data['pagekelas'] = $kelas;
+			$this->data['ranking'] = $this->Ranking->byKelas($kelas);
+			$this->load->view('interface/hasil_detail', $this->data);
+		}
 	}
 	public function Reset()
 	{
@@ -404,10 +411,14 @@ class Admin extends CI_Controller
 		$this->Nilai->reset();
 		redirect('Admin/Ranking');
 	}
+	public function tes()
+	{
+		echo json_encode($this->Ranking->get_kelas());
+	}
 	public function Cetak()
 	{
 		$text = '
-		<page>
+		<page style="padding:20px;">
 			<style>
 			h1{
 				text-align:center;
