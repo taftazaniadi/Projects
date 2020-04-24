@@ -78,7 +78,7 @@
                                         </div>
                                         <div class="timeline-body">
                                             <p style="text-align: justify">
-                                                Alternatif merupakan calon siswa baru yang mendaftar di Madrasah Aliyah Negeri 1 Yogyakarta dan akan diseleksi berdasarkan nilai yang didapatkan dari setiap Kriteria atau Tes yang sudah ditetapkan.
+                                                Alternatif merupakan Data siswa yang sudah ditetapkan untuk diolah nilainya.
                                             </p>
                                         </div>
                                     </div>
