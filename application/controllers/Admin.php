@@ -59,6 +59,8 @@ class Admin extends CI_Controller
 	//kriteria
 	public function Kriteria()
 	{
+		$this->data['p2'] = $this->Kriteria->is100();
+
 		$this->load->view('interface/kriteria', $this->data);
 	}
 	public function Tambah_kriteria()

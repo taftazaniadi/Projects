@@ -104,7 +104,7 @@
                                                             <div class="col-md-6">
                                                                 <div class="form-group form-group-default">
                                                                     <label>Bobot</label>
-                                                                    <input name="bobot" type="number" class="form-control" placeholder="ex: 90">
+                                                                    <input name="bobot" min="1" type="number" class="form-control" placeholder="ex: 90">
                                                                 </div>
                                                             </div>
 
@@ -160,7 +160,7 @@
                                                             <div class="col-md-6">
                                                                 <div class="form-group form-group-default">
                                                                     <label>Bobot</label>
-                                                                    <input id="editBobot" name="bobot" type="number" class="form-control" placeholder="ex: 90">
+                                                                    <input id="editBobot" min="1" name="bobot" type="number" class="form-control" placeholder="ex: 90">
                                                                 </div>
                                                             </div>
 
@@ -231,6 +231,25 @@
     </div>
 
     <?php $this->load->view("_partials/js.php") ?>
+    <script>
+        <?php
+        if ($p2->c !=100) {
+        ?>
+            swal({
+                icon: 'warning',
+                title: 'Peringatan',
+                text: 'Jumlah bobot keseluruhan kriteria harus genap 100',
+                buttons: {
+                    confirm: {
+                        text: 'Mengerti',
+                        className: 'btn btn-success'
+                    }
+                }
+            })
+            // alert('tidak 100');
+        <?php
+        } ?>
+    </script>
 </body>
 
 </html>

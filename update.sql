@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.1
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:3306
--- Generation Time: Mar 31, 2020 at 09:54 PM
--- Server version: 5.7.24
--- PHP Version: 7.2.19
+-- Host: 127.0.0.1
+-- Generation Time: Apr 24, 2020 at 08:24 PM
+-- Server version: 10.4.11-MariaDB
+-- PHP Version: 7.2.29
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -100,7 +99,8 @@ CREATE TABLE `kriteria` (
 INSERT INTO `kriteria` (`id`, `nama`, `jenis`, `bobot`) VALUES
 (1, 'akademik', 'benefit', 50),
 (2, 'prestasi', 'benefit', 35),
-(3, 'sikap', 'benefit', 15);
+(3, 'sikap', 'benefit', 14),
+(4, 'bayu', 'benefit', 1);
 
 -- --------------------------------------------------------
 
@@ -123,15 +123,15 @@ CREATE TABLE `nilai` (
 --
 
 INSERT INTO `nilai` (`id`, `siswa`, `semester`, `kriteria`, `nilai`, `normalisasi`, `preferensi`) VALUES
-(10, 333, 1, 1, 50, 0, 0),
-(11, 333, 1, 2, 1, 0, 0),
-(12, 333, 1, 3, 20, 0, 0),
-(13, 62000, 1, 1, 100, 0, 0),
-(14, 62000, 1, 2, 2, 0, 0),
-(15, 62000, 1, 3, 20, 0, 0),
-(16, 3434334, 1, 1, 10, 0, 0),
-(17, 3434334, 1, 2, 2, 0, 0),
-(18, 3434334, 1, 3, 50, 0, 0);
+(10, 333, 1, 1, 50, 0.5, 0.25),
+(11, 333, 1, 2, 1, 0.5, 0.175),
+(12, 333, 1, 3, 20, 0.4, 0.056),
+(13, 62000, 1, 1, 100, 1, 0.5),
+(14, 62000, 1, 2, 2, 1, 0.35),
+(15, 62000, 1, 3, 20, 0.4, 0.056),
+(16, 3434334, 1, 1, 10, 0.1, 0.05),
+(17, 3434334, 1, 2, 2, 1, 0.35),
+(18, 3434334, 1, 3, 50, 1, 0.14);
 
 -- --------------------------------------------------------
 
@@ -146,6 +146,15 @@ CREATE TABLE `ranking` (
   `peringkat` int(11) NOT NULL,
   `keputusan` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `ranking`
+--
+
+INSERT INTO `ranking` (`id`, `siswa`, `total`, `peringkat`, `keputusan`) VALUES
+(1, 62000, 0.906, 1, 'diterima'),
+(2, 3434334, 0.54, 2, 'diterima'),
+(3, 333, 0.481, 3, 'diterima');
 
 -- --------------------------------------------------------
 
@@ -175,7 +184,7 @@ INSERT INTO `siswa` (`nis`, `nama`, `kelas`) VALUES
 --
 
 CREATE TABLE `users` (
-  `ID` char(5) NOT NULL,
+  `ID` int(5) NOT NULL,
   `Username` varchar(10) NOT NULL,
   `Password` varchar(10) NOT NULL,
   `Nama` varchar(30) NOT NULL,
@@ -188,7 +197,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`ID`, `Username`, `Password`, `Nama`, `Level`, `Keterangan`) VALUES
-('00001', 'dimas', 'dimas', 'dimas', 1, 'Administrator');
+(1, 'dimas', 'dimas', 'Russel', 1, 'Admin'),
+(5, 'Yoga', 'yoga123', 'M Yoga Ali', 1, 'User');
 
 --
 -- Indexes for dumped tables
@@ -268,7 +278,7 @@ ALTER TABLE `kelas`
 -- AUTO_INCREMENT for table `kriteria`
 --
 ALTER TABLE `kriteria`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `nilai`
@@ -280,7 +290,13 @@ ALTER TABLE `nilai`
 -- AUTO_INCREMENT for table `ranking`
 --
 ALTER TABLE `ranking`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `ID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

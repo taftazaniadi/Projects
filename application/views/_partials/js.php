@@ -42,6 +42,9 @@
 <!-- Atlantis DEMO methods, don't include it in your project! -->
 <script src="<?= base_url() ?>assets/js/setting-demo.js"></script>
 <!-- <script src="<?= base_url() ?>assets/js/demo.js"></script> -->
+<?php
+if(isset($kriteria) &&isset($total) &&isset($csiswa) &&isset($listacc)){
+?>
 <script>
     function htmlDecode(input) {
         var e = document.createElement('div');
@@ -110,7 +113,7 @@
         styleText: true
     })
 </script>
-
+<?php }?>
 <script>
     //siswa edit & hapus
     $('.edit-bt').on('click', function(e) {
@@ -157,7 +160,27 @@
         $("#form-edit").attr('action', '<?=base_url();?>Admin/Edit_jurusan/' + id);
 
     });
+    function hapus_user(id) {
+        swal({
+            icon: 'warning',
+            title: 'Yakin ingin menghapus user? ',
+            text: 'tekan cancel jika ingin membatalkan',
+            buttons: {
+                confirm: {
+                    text: 'Hapus',
+                    className: 'btn btn-danger'
+                },
+                cancel: {
+                    visible: 'true',
+                    className: 'btn btn-success'
+                }
+            }
+        }).then((result) => {
+            if (result)
+                document.location.href = '<?=base_url();?>User/Hapus_user/' + id;
 
+        });
+    }
     function hapus_siswa(nis) {
         swal({
             icon: 'warning',
